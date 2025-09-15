@@ -357,17 +357,16 @@
       {showFilters && (
         <div className="relative w-full max-w-5xl mx-auto z-10 -mt-2">
           <div className="bg-white rounded-b-xl shadow-lg border border-gray-200 p-5 pt-8">
-            <div className="space-y-2">
+            <div className="space-y-5">
 
               {/* Section 1: Area & Price */}
               <div>
-                <h3 className="text-md font-semibold text-gray-800"></h3>
+                <h3 className="text-md font-semibold text-gray-800 mb-3">Primary Filters</h3>
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
                   <RangeFilter label="Area" unit="sqft." fromValue={fromArea} setFromValue={setFromArea} toValue={toArea} setToValue={setToArea} fullRange={fullAreaRange || [0, 10000]} />
                   <RangeFilter label="Price" unit="AED" fromValue={fromPrice} setFromValue={setFromPrice} toValue={toPrice} setToValue={setToPrice} fullRange={fullPriceRange || [0, 5000000]} />
                 </div>
               </div>
-
               {/* Divider */}
               <div className="border-t border-gray-600"></div>
               

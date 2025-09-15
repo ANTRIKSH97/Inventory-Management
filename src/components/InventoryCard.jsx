@@ -1,240 +1,187 @@
-import React, { useState } from "react";
-import { useNavigate } from "react-router-dom";
-import {
-  BedDouble,
-  MapPin,
-  Phone,
-  MessageCircle,
-  Dot,
-  ChevronLeft,
-  ChevronRight,
-  Bath,
-  BedSingle,
-  ExternalLink,
-} from "lucide-react";
-import PropertyBrochureGenerator from "./PropertyBrochureGenerator";
-const PropertyCard = ({ property }) => {
-  const [mainImageIndex, setMainImageIndex] = useState(0);
-  const navigate = useNavigate();
+import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { BedDouble, Bath, SquareKanban, MapPin, Phone, MessageCircle, ChevronLeft, ChevronRight } from 'lucide-react';
+import PropertyBrochureGenerator from './PropertyBrochureGenerator';
 
-  const handlePrevImage = (e) => {
-    e.stopPropagation();
-    setMainImageIndex((prevIndex) =>
-      prevIndex === 0 ? property.images.length - 1 : prevIndex - 1
-    );
-  };
+// Helper function
+const formatTimeSinceAdded = (dateString) => {
+  if (!dateString) return "N/A";
+  const date = new Date(dateString);
+  const now = new Date();
+  const diffInMs = now - date;
+  const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+
+  if (diffInDays === 0) return "Today";
+  if (diffInDays === 1) return "Yesterday";
+  return `${diffInDays} days ago`;
+};
+
+const InventoryCard = ({ property }) => {
+  const navigate = useNavigate();
+  const [mainImageIndex, setMainImageIndex] = React.useState(0);
+
+  if (!property) return null;
+  const { images = [] } = property;
 
   const handleNextImage = (e) => {
     e.stopPropagation();
-    setMainImageIndex((prevIndex) =>
-      prevIndex === property.images.length - 1 ? 0 : prevIndex + 1
-    );
+    setMainImageIndex((prev) => (prev + 1) % images.length);
   };
 
-  // Function to format the time since listing was added
-  const formatTimeSinceAdded = (createdAt) => {
-    if (!createdAt) return "N/A";
-    const listingDate = new Date(createdAt);
-    const now = new Date();
-    const diffInMs = now - listingDate;
-    const diffInDays = Math.floor(diffInMs / (1000 * 60 * 60 * 24));
+  const handlePrevImage = (e) => {
+    e.stopPropagation();
+    setMainImageIndex((prev) => (prev - 1 + images.length) % images.length);
+  };
 
-    if (diffInDays === 0) return "Today";
-    if (diffInDays === 1) return "Yesterday";
-    if (diffInDays < 7) return `${diffInDays} days ago`;
-    if (diffInDays < 30) return `${Math.floor(diffInDays / 7)} weeks ago`;
-    return listingDate.toLocaleDateString();
+  const handleCardClick = () => {
+    if (property.id) {
+      navigate(`/${property.id}`);
+    }
   };
 
   return (
     <div
-      className="md:flex bg-white rounded-lg shadow-md overflow-hidden my-4 w-[100%] cursor-pointer border-zinc-300 border-2 "
-      onClick={() => navigate(`/${property.id}`)}
+      className="flex flex-col bg-white rounded-xl shadow-lg overflow-hidden 
+      transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 cursor-pointer 
+      border border-gray-200 w-[480px]"
+      onClick={handleCardClick}
       role="button"
       tabIndex={0}
-      onKeyDown={(e) => {
-        if (e.key === "Enter" || e.key === " ") {
-          navigate(`/${property.id}`);
-        }
-      }}
     >
-      {/* Image Section - Full width and more square on mobile, 42% width on desktop */}
-      <div className="w-full h-54 md:h-80 md:h-auto md:w-[42%] relative">
-        {property.images[mainImageIndex]?.url ? (
+      {/* === Image Section === */}
+      <div className="relative w-full h-56 flex-shrink-0">
+        {images.length > 0 && images[mainImageIndex]?.url ? (
           <img
-            src={property.images[mainImageIndex].url}
+            src={images[mainImageIndex].url}
             alt={property.title}
             className="w-full h-full object-cover"
           />
         ) : (
-          <div className="w-full h-54 md:h-80 bg-blue-100 flex items-center justify-center">
-            <span className="text-blue-800 text-xl">NO IMAGE AVAILABLE</span>
-          </div>
-        )}
-        {property.unitType && (
-          <div className="absolute top-2 right-2 bg-white text-black text-xs font-semibold px-2 py-1 rounded shadow">
-            {property.offeringType}
+          <div className="w-full h-full bg-gray-100 flex items-center justify-center text-gray-400">
+            No Image
           </div>
         )}
 
-        {property.images.length > 1 && (
+        <div className="absolute top-3 left-3 bg-black/50 text-white text-xs font-bold px-2.5 py-1 rounded-full">
+          FOR {property.offeringType?.toUpperCase() || 'N/A'}
+        </div>
+
+        {images.length > 1 && (
           <>
-            <div className="absolute inset-0 flex items-center justify-between px-2">
-              <button
-                onClick={handlePrevImage}
-                className="bg-gray-200 bg-opacity-50 rounded-full cursor-pointer hover:opacity-100"
-              >
-                <ChevronLeft className="h-8 w-8 rounded-full hover:bg-gray-300" />
-              </button>
-              <button
-                onClick={handleNextImage}
-                className="bg-gray-200 bg-opacity-50 rounded-full cursor-pointer hover:opacity-100"
-              >
-                <ChevronRight className="h-8 w-8 rounded-full hover:bg-gray-300" />
-              </button>
-            </div>
-            <div className="absolute bottom-2 left-2 bg-black bg-opacity-50 text-white text-xs px-2 py-1 rounded">
-              {mainImageIndex + 1}/{property.images.length}
+            <button
+              onClick={handlePrevImage}
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/70 p-1.5 rounded-full hover:bg-white transition-all shadow-md"
+            >
+              <ChevronLeft size={20} />
+            </button>
+            <button
+              onClick={handleNextImage}
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/70 p-1.5 rounded-full hover:bg-white transition-all shadow-md"
+            >
+              <ChevronRight size={20} />
+            </button>
+            <div className="absolute bottom-2 left-1/2 -translate-x-1/2 bg-black/50 text-white text-xs px-2.5 py-1 rounded-full">
+              {mainImageIndex + 1} / {images.length}
             </div>
           </>
         )}
       </div>
 
-      {/* Content Section - Full width on mobile, 58% on desktop */}
-      <div className="w-full md:w-[58%] p-4 relative flex flex-col justify-between">
+      {/* === Content Section === */}
+      <div className="p-5 flex flex-col justify-between flex-1 text-left">
         <div>
-          <div className="flex items-center mb-2">
-            <span className="text-md md:text-xl font-semibold mr-2">
-              AED {property.price}
+          <div className="flex justify-between items-start">
+            <p className="text-2xl font-bold text-gray-800">
+              AED {property.price || 'N/A'}
+            </p>
+            <span
+              className={`px-3 py-1 text-xs font-semibold rounded-full ${
+                property.status === 'Published'
+                  ? 'bg-green-100 text-green-800'
+                  : 'bg-red-100 text-red-800'
+              }`}
+            >
+              {property.status || 'N/A'}
             </span>
           </div>
 
-        {/* Status indicator */}
-{property.status === "Published" ? (
-  <div className="absolute top-2 right-2 text-green-800 text-xs font-semibold px-3 py-1 rounded-full bg-green-200 shadow-md">
-    <div className="flex items-center space-x-1">
-      <div className="w-2 h-2 rounded-full bg-green-600 animate-pulse"></div>
-      <span>PUBLISHED</span>
-    </div>
-  </div>
-) : (
-  <div className="absolute top-2 right-2 text-red-800 text-xs font-semibold px-3 py-1 rounded-full bg-red-200 shadow-md">
-    <div className="flex items-center space-x-1">
-      <div className="w-2 h-2 rounded-full bg-red-600 animate-pulse"></div>
-      <span>POCKETED</span>
-    </div>
-  </div>
-)}
+          <h3 className="text-lg font-semibold text-gray-900 mt-2 break-words">
+            {property.title || 'Untitled Property'}
+          </h3>
 
-          <div className="text-left">
-            {/* Property details with responsive wrapping */}
-            <div className="flex flex-wrap items-center text-sm text-gray-600 mb-2">
-              <span className="mr-3 mb-1">{property.unitType}</span>
+          <div className="flex flex-wrap gap-4 my-4 text-sm text-gray-700">
+            <div className="flex items-center">
+              <BedDouble size={16} className="mr-1.5 text-gray-500" />
+              <span>{property.bedrooms ?? 'N/A'} Beds</span>
+            </div>
+            <div className="flex items-center">
+              <Bath size={16} className="mr-1.5 text-gray-500" />
+              <span>{property.bathrooms ?? 'N/A'} Baths</span>
+            </div>
+            <div className="flex items-center">
+              <SquareKanban size={16} className="mr-1.5 text-gray-500" />
+              <span>{property.size ?? 'N/A'} sqft</span>
+            </div>
+          </div>
 
-              {!property.unitType.toLowerCase().includes("residen") && (
-                <>
-                  {property.bedrooms && (
-                    <span className="mr-3 mb-1 flex items-center">
-                      <span className="flex items-center">
-                        {property.bedrooms == 0 ? (
-                          <>
-                            <BedSingle className="w-5 h-5 mr-1" />
-                            Studio
-                          </>
-                        ) : (
-                          <>
-                            <BedDouble className="w-5 h-5 mr-1" />
-                            {property.bedrooms} Bedroom
-                            {property.bedrooms > 1 ? "s" : ""}
-                          </>
-                        )}
-                      </span>
-                    </span>
-                  )}
-                  {property.bathrooms && (
-                    <span className="mr-3 mb-1 flex items-center">
-                      <Bath className="w-5 h-5 mr-1" />
-                      {property.bathrooms} Bathrooms
-                    </span>
-                  )}
-                </>
-              )}
-              <span className="mb-1">Area: {property.size} sqft</span>
+          {/* --- All Details --- */}
+          <div className="space-y-2 text-sm text-gray-600 border-t border-gray-100 pt-3">
+            <div className="flex items-center text-green-600 font-medium">
+              <MapPin size={15} className="mr-1.5 flex-shrink-0" />
+              <span>Bayut: {property.locationBayut || 'N/A'}</span>
             </div>
-            <p className="text-md text-[#1c783f] mb-2">{property.title}</p>
-            <p className="text-md text-gray-800 mb-2">
-              Status: {property.projectStatus ? property.projectStatus : "N/A"}
-            </p>
-            <p className="text-sm text-gray-700 mb-2">
-              <div className="flex items-center text-sm text-red-500">
-             <MapPin size={15} className="mr-1.5 flex-shrink-0" />
-            <span>PF: {property.locationPf || 'N/A'}</span>
-               </div>
-              
-            <div className="flex items-center text-sm text-green-600 font-medium">
-           <MapPin size={15} className="mr-1.5 flex-shrink-0" />
-           <span>Bayut: {property.locationBayut || 'N/A'}</span>
+            <div className="flex items-center text-red-500">
+              <MapPin size={15} className="mr-1.5 flex-shrink-0" />
+              <span>PF: {property.locationPf || 'N/A'}</span>
             </div>
-            </p>
-            {/* Date since listing was added */}
-            <p className="text-sm text-gray-600 mb-2">
-              Listed: {formatTimeSinceAdded(property.createdAt)}
-            </p>
-            {/* Date since listing was updated */}
-            <p className="text-sm text-gray-600 mb-2">
-              Updated: {formatTimeSinceAdded(property.updatedAt)}
-            </p>
-            <div className="mt-4 flex items-center gap-2">
-              <div onClick={(e) => e.stopPropagation()}>
-                <PropertyBrochureGenerator listing={property} />
-              </div>
-            </div>
+            <p>Status: {property.projectStatus || 'N/A'}</p>
+            <p>Listed: {formatTimeSinceAdded(property.createdAt)}</p>
+            <p>Updated: {formatTimeSinceAdded(property.updatedAt)}</p>
           </div>
         </div>
 
-        {/* Contact and owner info */}
-        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between mt-4 gap-3">
-          <div>
-            <div className="flex items-center">
-              <div className="text-sm">Listing Owner: &nbsp;</div>
-
+        {/* --- Bottom Section --- */}
+        <div className="border-t border-gray-100 pt-4 mt-4">
+          <div className="flex items-center justify-between mb-3">
+            <div className="text-sm">
+              <span className="text-gray-500">Owner: </span>
               <a
                 href={property.ownerUrl}
                 target="_blank"
-
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
-                className="text-sm font-semibold text-[#1c783f] underline"
+                className="font-semibold text-blue-600 hover:underline break-all"
               >
-                {property.ownerName}
+                {property.ownerName || 'N/A'}
               </a>
+            </div>
+            <div onClick={(e) => e.stopPropagation()}>
+              <PropertyBrochureGenerator listing={property} />
             </div>
           </div>
 
-         <div className="flex space-x-2">
-  <a
-    href={`tel:${property.ownerPhone}`}
-    onClick={(e) => e.stopPropagation()}
-    className="bg-blue-500 text-white px-4 py-2 rounded-full text-sm flex items-center shadow-md hover:bg-blue-600 transition-colors transform hover:scale-105"
-  >
-    <Phone className="h-4 w-4 mr-2" />
-    <span>Call</span>
-  </a>
-  <a
-    href={`https://wa.me/${property.ownerPhone}`}
-    onClick={(e) => e.stopPropagation()}
-    className="bg-green-500 text-white px-4 py-2 rounded-full text-sm flex items-center shadow-md hover:bg-green-600 transition-colors transform hover:scale-105"
-  >
-    <MessageCircle className="h-4 w-4 mr-2" />
-    <span>Whatsapp</span>
-  </a>
-</div>
-
-
+          <div className="flex space-x-2">
+            <a
+              href={`tel:${property.ownerPhone}`}
+              onClick={(e) => e.stopPropagation()}
+              className="flex-1 text-center bg-blue-500 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-blue-600 transition-colors"
+            >
+              <Phone className="h-4 w-4 mr-2" />
+              <span>Call</span>
+            </a>
+            <a
+              href={`https://wa.me/${property.ownerPhone}`}
+              onClick={(e) => e.stopPropagation()}
+              className="flex-1 text-center bg-green-500 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-green-600 transition-colors"
+            >
+              <MessageCircle className="h-4 w-4 mr-2" />
+              <span>Whatsapp</span>
+            </a>
+          </div>
         </div>
       </div>
     </div>
   );
 };
 
-export default PropertyCard;
+export default InventoryCard;

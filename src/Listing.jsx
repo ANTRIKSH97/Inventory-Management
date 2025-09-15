@@ -66,7 +66,7 @@ const Listing = () => {
             .includes(searchTerm.toLowerCase())
       )
     );
-  }, [searchTerm, propertiesData]);
+  }, [searchTerm, propertiesData]); 
 
   return (
     <div className="mx-auto">
@@ -100,11 +100,14 @@ const Listing = () => {
           ) : (
             <div className="max-w-5xl mx-auto px-1 md:px-4">
               <div className="bg-gray-50/50 rounded-xl p-1 backdrop-blur-sm">
-                <div className="space-y-4">
-                  {currentFilteredData.map((property, index) => (
-                    <InventoryCard key={index} property={property} />
-                  ))}
-                </div>
+             <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 justify-items-center">
+  {currentFilteredData.map((property, index) => (
+    <InventoryCard key={index} property={property} />
+  ))}
+</div>
+
+
+
               </div>
             </div>
           )}
