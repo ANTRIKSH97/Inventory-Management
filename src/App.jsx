@@ -53,12 +53,12 @@ function App() {
   // }
 
   return (
-  <div className="font-sans bg-gray-50 min-h-screen">
+  <div className="font-sans bg-grey-50 min-h-screen">
       {/* Updated Navbar yahan hai */}
       <Navbar />
 
       {/* Main Content Area se Title HATA diya gaya hai */}
-      <main className="max-w-7xl mx-auto px-4 py-6">
+      <main className="max-w-7xl mx-auto px-4 py-0">
         {/* Routing */}
         <Routes>
           <Route path="/" element={<Listing />} />

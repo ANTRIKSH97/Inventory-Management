@@ -117,14 +117,14 @@ const AutocompleteSearch = ({
       <div className="flex items-center relative">
         <input
           type="text"
-          className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+          className="w-full px-4 py-3 pl-10 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
           placeholder="Search for a city, community, or building..."
           value={searchTerm}
           onChange={handleInputChange}
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
         />
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400 h-5 w-5" />
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-400 h-5 w-5" />
         {searchTerm && (
           <button
             className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"

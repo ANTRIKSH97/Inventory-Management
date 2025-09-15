@@ -135,7 +135,7 @@ const PropertyCard = ({ property }) => {
                 <>
                   {property.bedrooms && (
                     <span className="mr-3 mb-1 flex items-center">
-                      <span className="flex items-center hover:bg-amber-300">
+                      <span className="flex items-center">
                         {property.bedrooms == 0 ? (
                           <>
                             <BedSingle className="w-5 h-5 mr-1" />
@@ -166,13 +166,15 @@ const PropertyCard = ({ property }) => {
               Status: {property.projectStatus ? property.projectStatus : "N/A"}
             </p>
             <p className="text-sm text-gray-700 mb-2">
-              <MapPin className="h-4 w-4 mr-1 inline-block align-middle " />
-              PF: 
-              <span className="text-red-500">{property.locationPf}</span>
-              <br />
-              <MapPin className="h-4 w-4 mr-1 inline-block align-middle" />
-              Bayut: 
-              <span className="text-green-500">{property.locationBayut}</span>
+              <div className="flex items-center text-sm text-red-500">
+             <MapPin size={15} className="mr-1.5 flex-shrink-0" />
+            <span>PF: {property.locationPf || 'N/A'}</span>
+               </div>
+              
+            <div className="flex items-center text-sm text-green-600 font-medium">
+           <MapPin size={15} className="mr-1.5 flex-shrink-0" />
+           <span>Bayut: {property.locationBayut || 'N/A'}</span>
+            </div>
             </p>
             {/* Date since listing was added */}
             <p className="text-sm text-gray-600 mb-2">
@@ -199,6 +201,7 @@ const PropertyCard = ({ property }) => {
               <a
                 href={property.ownerUrl}
                 target="_blank"
+
                 rel="noopener noreferrer"
                 onClick={(e) => e.stopPropagation()}
                 className="text-sm font-semibold text-[#1c783f] underline"
