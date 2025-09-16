@@ -83,15 +83,15 @@ const Listing = () => {
       />
 
  {/* Toggle Button */}
-<div className="flex justify-end max-w-5xl mx-auto px-4 mb-1">
+<div className="flex justify-end max-w-5xl mx-27 px-4 mb-1">
   <button
     onClick={() => setIsGridView(!isGridView)}
-    className="relative inline-flex items-center w-24 h-9 rounded-full transition-colors duration-500 focus:outline-none
+    className="relative inline-flex items-center w-24 h-9  rounded-full transition-colors duration-500 focus:outline-none
                bg-gradient-to-r from-green-500 to-emerald-600 shadow-lg"
   >
     {/* Sliding Knob */}
     <span
-      className={`absolute top-1 left-0 w-10 h-7 bg-white rounded-full shadow-md transform transition-transform duration-500 ease-in-out
+      className={`absolute top-1 left-0.5 right-0 w-9 h-7 bg-white rounded-full shadow-md transform transition-transform duration-500 ease-in-out
         ${isGridView ? "translate-x-14" : "translate-x-0"}`}
     />
 

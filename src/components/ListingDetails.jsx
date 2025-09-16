@@ -108,7 +108,7 @@ const ListingDetails = () => {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
         {/* Left Column: Image Gallery */}
-        <div className="space-y-3">
+        <div className="space-y-3 w-[110%]">
           <div className="relative w-full h-[420px] bg-gray-100 rounded-xl shadow-lg border border-green-700 overflow-hidden">
             {hasImages ? (
               <img src={images[imageIndex].url} alt={property.title} className="w-full h-full object-cover" />
@@ -154,7 +154,7 @@ const ListingDetails = () => {
             </div>
           )}
         </div>
- <div className="bg-white rounded-xl shadow-lg border border-green-700 p-4 flex flex-col">
+ <div className="bg-white rounded-xl shadow-lg border border-green-700 p-4 flex flex-col w-[80%] ml-18">
           <div className="flex-grow">
             <p className="text-2xl font-bold text-green-700 mt-">AED {property.price}</p>
             <h1 className="text-2xl font-bold text-black">{property.title}</h1> 
@@ -194,7 +194,7 @@ const ListingDetails = () => {
                 <span>{property.size ?? "N/A"} sqft</span>
               </div>
               <div className="flex items-center text-black-700">
-                
+
               </div>
               <div className="flex items-center text-green-800">
                 <MapPin size={16} className="mr-2 text-green-900" />
@@ -209,7 +209,7 @@ const ListingDetails = () => {
 
           <div className="border-t border-gray-200 mt-6 pt-6 flex flex-col gap-4">
             <div className="flex items-center gap-2">
-              <span className="text-gray-600 text-sm">Listing Owner:</span>
+              <span className="text-black text-sm">Listing Owner:</span>
               <a
                 href={property.ownerUrl}
                 target="_blank"
@@ -223,14 +223,14 @@ const ListingDetails = () => {
             <div className="flex flex-wrap gap-4">
               <a
                 href={`tel:${property.ownerPhone}`}
-                className="flex-1 flex items-center justify-center bg-blue-600 text-white px- py-3 rounded-lg font-semibold hover:bg-blue-700 transition"
-              >
+                className="flex-1 text-center bg-blue-700 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-blue-600 transition-colors"
+            >
                 <Phone size={16} className="mr-2" /> Call
               </a>
               <a
                 href={`https://wa.me/${property.ownerPhone}`}
-                className="flex-1 flex items-center justify-center bg-green-600 text-white px-4 py-3 rounded-lg font-semibold hover:bg-green-700 transition"
-              >
+                className="flex-1 text-center bg-green-700 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-green-600 transition-colors"
+            >
                 <MessageCircle size={16} className="mr-2" /> Whatsapp
               </a>
               <div className="flex-1">

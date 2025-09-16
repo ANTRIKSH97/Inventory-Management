@@ -333,7 +333,7 @@
             />
           </div>
             {/* Search & Filter Buttons */}
-        <div className="flex items-center gap-3">
+        <div className="flex items-center gap-3 mr-6">
           <button
             onClick={handleFilterClick}
             className="px-5 py-3 flex items-center gap-2 bg-gradient-to-r from-green-600 to-emerald-700 text-white rounded-xl font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"

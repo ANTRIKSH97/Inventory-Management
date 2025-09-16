@@ -1,8 +1,17 @@
-import React from "react";
-import { ChevronLeft, ChevronRight } from "lucide-react";
+import React, { useEffect } from 'react'; // Step 1: useEffect ko import karein
+import { ChevronLeft, ChevronRight } from 'lucide-react';
 
 const Pagination = ({ itemsPerPage, setItemsPerPage, currentPage, setCurrentPage, totalItems }) => {
     const totalPages = Math.ceil(totalItems / itemsPerPage);
+
+    // Step 2: Yeh naya hook add karein
+    // Jab bhi 'currentPage' badlega, yeh page ko upar scroll kar dega.
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth' // Smooth scrolling ke liye
+        });
+    }, [currentPage]);
 
     return (
         <div className="flex flex-col sm:flex-row justify-between items-center gap-4 bg-white p-2 sm:p-3 rounded-lg sm:rounded-xl md:rounded-2xl shadow-md w-full max-w-full sm:max-w-3xl mx-auto">
@@ -11,11 +20,14 @@ const Pagination = ({ itemsPerPage, setItemsPerPage, currentPage, setCurrentPage
                 <span className="text-sm sm:text-base text-gray-700 font-medium whitespace-nowrap">Items per page:</span>
                 <select 
                     value={itemsPerPage}
-                    onChange={(e) => setItemsPerPage(Number(e.target.value))}
+                    onChange={(e) => {
+                        setItemsPerPage(Number(e.target.value));
+                        setCurrentPage(1); // Item count badalne par pehle page par jaayein
+                    }}
                     className="border border-gray-300 rounded px-2 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-blue-300 flex-grow sm:flex-grow-0"
                 >
                     {[5, 10, 15, 20, 25, 30].map(value => (
-                        <option key={value} value={value}>{value}</option>
+                        <option key={value} value={value}>{value}</option>   
                     ))}
                 </select>
             </div>
@@ -49,3 +61,4 @@ const Pagination = ({ itemsPerPage, setItemsPerPage, currentPage, setCurrentPage
 };
 
 export default Pagination;
+

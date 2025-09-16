@@ -113,7 +113,7 @@ const AutocompleteSearch = ({
   };
 
   return (
-    <div className="relative w-full mx-auto my-2">
+    <div className="relative w-[95%] mx-auto my-2">
       <div className="flex items-center relative">
         <input
           type="text"

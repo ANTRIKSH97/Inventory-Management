@@ -51,7 +51,7 @@ const InventoryCard = ({ property , view  }) => {
   >
     {/* === Image Section === */}
 
-      <div className="relative w-full h-56 flex-shrink-0 ">
+      <div className="relative w-full h-50 flex-shrink-0 ">
         {images.length > 0 && images[mainImageIndex]?.url ? (
           <img
             src={images[mainImageIndex].url}
@@ -146,7 +146,7 @@ const InventoryCard = ({ property , view  }) => {
         <div className="border-t border-gray-100 pt-4 mt-4">
           <div className="flex items-center justify-between mb-3">
             <div className="text-sm">
-              <span className="text-red-700">Owner: </span>
+              <span className="text-black-700"> Listing Owner: </span>
               <a
                 href={property.ownerUrl}
                 target="_blank"
@@ -161,8 +161,7 @@ const InventoryCard = ({ property , view  }) => {
               <PropertyBrochureGenerator listing={property} />
             </div>
           </div>
-
-          <div className="flex space-x-2">
+          <div className="flex space-x-8 ">
             <a
               href={`tel:${property.ownerPhone}`}
               onClick={(e) => e.stopPropagation()}
@@ -176,9 +175,10 @@ const InventoryCard = ({ property , view  }) => {
               onClick={(e) => e.stopPropagation()}
               className="flex-1 text-center bg-green-700 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-green-600 transition-colors"
             >
-              <MessageCircle className="h-4 w-4 mr-2" />
+              <MessageCircle className="h-4 w-4 mr-2 " />
               <span>Whatsapp</span>
             </a>  
+            
           </div>
         </div>
       </div>
