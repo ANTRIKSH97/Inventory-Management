@@ -70,7 +70,7 @@
 //         <div className="text-sm text-gray-600">
 //           {formatValue(range[0])} {unit} - {formatValue(range[1])} {unit}
 //         </div>
-//       </div>
+//       </div> 
       
 //       <div className="relative mt-2 mb-4">
 //         <div className="h-1 bg-gray-200 rounded-full absolute w-full top-1/2 transform -translate-y-1/2"></div>

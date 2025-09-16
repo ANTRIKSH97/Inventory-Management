@@ -81,89 +81,95 @@ const RangeFilter = ({
   };
 
   return (
-    <div className="w-full max-w-md mx-auto">
-      <div className="mb-1 flex justify-between">
-        <span className="text-sm font-medium text-gray-700">
-          {label} Filter
+  <div className="w-full max-w-md mx-auto bg-white/60 backdrop-blur-md shadow-lg rounded-2xl p-5 border border-gray-200">
+    <div className="mb-3 flex justify-between items-center">
+      <span className="text-sm font-semibold text-gray-800 tracking-wide">
+        {label} Filter
+      </span>
+      {isInvalid && (
+        <span className="text-sm font-semibold text-red-500 animate-pulse">
+          Invalid Range
         </span>
-        {isInvalid && (
-          <span className="text-sm font-medium text-red-500">
-            Invalid Range
-          </span>
-        )}
-      </div>
+      )}
+    </div>
 
-      <div className="flex flex-col md:flex-row gap-4">
-        {/* From input group */}
-        <div className="flex-1">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            From
-          </label>
-          <div className="flex">
-            <button
-              onClick={decrementFrom}
-              className="px-3 py-2 bg-gray-200 rounded-l-md hover:bg-gray-300 focus:outline-none"
-              aria-label="Decrease from value"
-            >
-              -
-            </button>
-            <input
-              type="number"
-              value={fromValue}
-              onChange={handleFromChange}
-              /* Removed min/max restrictions to allow free editing */
-              className={`w-full px-3 py-2 border ${
-                isInvalid ? "border-red-500" : "border-gray-300"
-              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-            />
-            <button
-              onClick={incrementFrom}
-              className="px-3 py-2 bg-gray-200 rounded-r-md hover:bg-gray-300 focus:outline-none"
-              aria-label="Increase from value"
-            >
-              +
-            </button>
-          </div>
-        </div>
-
-        {/* To input group */}
-        <div className="flex-1">
-          <label className="block text-sm font-medium text-gray-700 mb-1">
-            To
-          </label>
-          <div className="flex">
-            <button
-              onClick={decrementTo}
-              className="px-3 py-2 bg-gray-200 rounded-l-md hover:bg-gray-300 focus:outline-none"
-              aria-label="Decrease to value"
-            >
-              -
-            </button>
-            <input
-              type="number"
-              value={toValue}
-              onChange={handleToChange}
-              /* Removed min/max restrictions to allow free editing */
-              className={`w-full px-3 py-2 border ${
-                isInvalid ? "border-red-500" : "border-gray-300"
-              } focus:outline-none focus:ring-2 focus:ring-blue-500`}
-            />
-            <button
-              onClick={incrementTo}
-              className="px-3 py-2 bg-gray-200 rounded-r-md hover:bg-gray-300 focus:outline-none"
-              aria-label="Increase to value"
-            >
-              +
-            </button>
-          </div>
+    <div className="flex flex-col md:flex-row gap-5">
+      {/* From input group */}
+      <div className="flex-1">
+        <label className="block text-xs font-medium text-gray-600 mb-1">
+          From
+        </label>
+        <div className="flex rounded-lg overflow-hidden shadow-sm">
+          <button
+            onClick={decrementFrom}
+            className="px-3 py-2 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-400 transition-all duration-200"
+            aria-label="Decrease from value"
+          >
+            -
+          </button>
+          <input
+            type="number"
+            value={fromValue}
+            onChange={handleFromChange}
+            className={`w-full px-3 py-2 text-center border-t border-b outline-none transition-all duration-200 ${
+              isInvalid ? "border-red-400 focus:ring-red-400" : "border-gray-200 focus:ring-blue-400"
+            }`}
+          />
+          <button
+            onClick={incrementFrom}
+            className="px-3 py-2 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-400 transition-all duration-200"
+            aria-label="Increase from value"
+          >
+            +
+          </button>
         </div>
       </div>
 
-      <div className="mt-2 text-sm text-gray-500">
-        Full Range: {fullMin} {unit} - {fullMax} {unit}
+      {/* To input group */}
+      <div className="flex-1">
+        <label className="block text-xs font-medium text-gray-600 mb-1">
+          To
+        </label>
+        <div className="flex rounded-lg overflow-hidden shadow-sm">
+          <button
+            onClick={decrementTo}
+            className="px-3 py-2 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-400 transition-all duration-200"
+            aria-label="Decrease to value"
+          >
+            -
+          </button>
+          <input
+            type="number"
+            value={toValue}
+            onChange={handleToChange}
+            className={`w-full px-3 py-2 text-center border-t border-b outline-none transition-all duration-200 ${
+              isInvalid ? "border-red-400 focus:ring-red-400" : "border-gray-200 focus:ring-blue-400"
+            }`}
+          />
+          <button
+            onClick={incrementTo}
+            className="px-3 py-2 bg-gradient-to-r from-gray-200 to-gray-300 hover:from-gray-300 hover:to-gray-400 transition-all duration-200"
+            aria-label="Increase to value"
+          >
+            +
+          </button>
+        </div>
       </div>
     </div>
-  );
+
+    <div className="mt-3 text-sm font-medium text-gray-600 text-center">
+      Full Range:{" "}
+      <span className="text-blue-600 font-semibold">
+        {fullMin} {unit}
+      </span>{" "}
+      -{" "}
+      <span className="text-blue-600 font-semibold">
+        {fullMax} {unit}
+      </span>
+    </div>
+  </div>
+);
+
 };
 
 export default RangeFilter;

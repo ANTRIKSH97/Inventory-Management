@@ -318,145 +318,193 @@
     ];
 
   return (
-      <div className="relative w-full px-4 py-2 space-y-4">
-        {/* Search Bar and Buttons */}
-        <div className="relative w-full max-w-5xl mx-auto my-6 z-20">
-          <div className="flex items-center space-x-2">
-            {/* Search Input */}
-            <div className="relative flex-1">
-              <AutocompleteSearch
-                locations={locationsArray}
-                savedProperty={savedFilteredData.current}
-                setProperty={setFilteredData}
-                searchTerm={searchTerm}
-                setSearchTerm={setSearchTerm}
-              />
-            </div>
-            {/* Search and Filter Buttons */}
-            <div className="flex items-center space-x-2">
-              <button
-                onClick={handleFilterClick}
-
-                className="px-6 py-3 bg-green-600 text-white rounded-lg font-semibold shadow-md hover:bg-emerald-800 transition-colors"
-              >
-                <Search size={20} className="inline-block mr-2" />
-                Search
-              </button>
-              <button
-                onClick={toggleFilters}
-                className="px-6 py-3 bg-red-200 text-gray-700 rounded-lg font-semibold shadow-md border border-gray-300 hover:bg-gray-100 transition-colors"
-              >
-                <Filter size={20} className="inline-block mr-2" />
-                Filter
-              </button>
-            </div>
+    <div className="relative w-full px-4 py-2 space-y-4">
+      {/* Search Bar and Buttons */}
+      <div className="relative w-full max-w-5xl mx-auto my-6 z-20">
+        <div className="flex items-center space-x-2">
+          {/* Search Input */}
+          <div className="relative flex-1">
+            <AutocompleteSearch
+              locations={locationsArray}
+              savedProperty={savedFilteredData.current}
+              setProperty={setFilteredData}
+              searchTerm={searchTerm}
+              setSearchTerm={setSearchTerm}
+            />
           </div>
+            {/* Search & Filter Buttons */}
+        <div className="flex items-center gap-3">
+          <button
+            onClick={handleFilterClick}
+            className="px-5 py-3 flex items-center gap-2 bg-gradient-to-r from-green-600 to-emerald-700 text-white rounded-xl font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
+          >
+            <Search size={18} />
+            Search
+          </button>
+          <button
+            onClick={toggleFilters}
+            className="px-5 py-3 flex items-center gap-2 bg-white/80 backdrop-blur-md text-gray-800 rounded-xl font-semibold shadow-md border border-gray-300 hover:shadow-lg hover:scale-105 transition-all duration-300"
+          >
+            <Filter size={18} />
+            Filters
+          </button>
         </div>
-        
-       {/* Filter Dropdown - Naya aur Behtar Layout */}
+      </div>
+    </div>
+
+      {/* Filter Dropdown */}
       {showFilters && (
-        <div className="relative w-full max-w-5xl mx-auto z-10 -mt-2">
-          <div className="bg-white rounded-b-xl shadow-lg border border-gray-200 p-5 pt-8">
-            <div className="space-y-5">
+        <div className="relative w-full max-w-5xl mx-auto z-10 -mt-2 animate-fadeIn">
+          <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200 p-6 transition-all duration-300">
+            <div className="space-y-6">
 
               {/* Section 1: Area & Price */}
               <div>
-                <h3 className="text-md font-semibold text-gray-800 mb-3">Primary Filters</h3>
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-4">
-                  <RangeFilter label="Area" unit="sqft." fromValue={fromArea} setFromValue={setFromArea} toValue={toArea} setToValue={setToArea} fullRange={fullAreaRange || [0, 10000]} />
-                  <RangeFilter label="Price" unit="AED" fromValue={fromPrice} setFromValue={setFromPrice} toValue={toPrice} setToValue={setToPrice} fullRange={fullPriceRange || [0, 5000000]} />
-                </div>
-              </div>
-              {/* Divider */}
-              <div className="border-t border-gray-600"></div>
-              
-                
-              {/* Section 2: Other Details (New & Improved UI) */}
-<div>
-  <h3 className="text-md font-semibold text-gray-800 mb-3"></h3>
-  <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-    
-    {/* Listing Owner (Takes more space on larger screens) */}
-    <div className="col-span-2 md:col-span-3 lg:col-span-1">
-      <label htmlFor="ownerName" className="block text-sm font-medium text-gray-700 mb-1">
-        Listing Owner
-      </label>
-      <SearchableSelect
-        id="ownerName"
-        name="ownerName"
-        value={filters.ownerName}
-        onChange={handleInputChange}
-        placeholder="Select Owner"
-        options={ownerArray.filter(Boolean)}
-      />
-    </div>
+                <h3 className="text-lg font-bold text-green-700 flex items-center gap-2">
+                  <span className="w-2 h-2 bg-green-600 rounded-full"></span>
+                  Primary Filters
+                </h3>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3">
+  {/* Area Filter */}
+  <div className="bg-white/90 backdrop-blur-md border border-green-700 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
+    <h4 className="text-sm font-semibold text-gray-700 mb-3">Area (sqft.)</h4>
+    <RangeFilter
+      label=""
+      unit="sqft."
+      fromValue={fromArea}
+      setFromValue={setFromArea}
+      toValue={toArea}
+      setToValue={setToArea}
+      fullRange={fullAreaRange || [0, 10000]}
+    />
+  </div>
 
-    {/* All Other Select Filters */}
-    {selectFilters.map((filter) => (
-      <div key={filter.name}>
-        <label htmlFor={filter.name} className="block text-sm font-medium text-gray-700 mb-1">
-          {filter.label}
-        </label>
-        <div className="relative">
-          <select
-            id={filter.name}
-            name={filter.name}
-            value={filters[filter.name]}
-            onChange={handleInputChange}
-            className="w-full h-11 pl-3 pr-8 border border-gray-300 rounded-md text-sm bg-gray-50 appearance-none focus:ring-1 focus:ring-brand-green focus:border-brand-green"
-          >
-            <option value="">Any</option>
-            {filter.options.map((option) => (
-              <option key={option} value={option}>
-                {filter.name === "bedrooms" && option === 0 ? "Studio" : option}
-              </option>
-            ))}
-          </select>
-          <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
-            <svg className="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M8 9l4-4 4 4m0 6l-4 4-4-4"></path>
-            </svg>
-          </div>
-        </div>
-      </div>
-    ))}
+  {/* Price Filter */}
+  <div className="bg-white/90 backdrop-blur-md border border-green-700 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
+    <h4 className="text-sm font-semibold text-gray-700 mb-3">Price (AED)</h4>
+    <RangeFilter
+      label=""
+      unit="AED"
+      fromValue={fromPrice}
+      setFromValue={setFromPrice}
+      toValue={toPrice}
+      setToValue={setToPrice}
+      fullRange={fullPriceRange || [0, 5000000]}
+    />
   </div>
 </div>
-                
-                {/* Action Buttons */}
-                <div className="flex justify-end gap-3 mt-6">
-                  <button
-                    type="button"
-                    onClick={handleRefresh}
-                    className="bg-green-500 h-11 w-11 hover:bg-green-600 text-white font-semibold rounded-md flex items-center justify-center"
-                  >
-                    <RefreshCcw
-                      className={`h-5 w-5 ${isSpinning ? "animate-spin" : ""}`}
-                      style={{ animationDuration: isSpinning ? "1s" : "0s" }}
+
+
+              </div>
+
+              {/* Divider */}
+              <div className="w-full h-[1px] bg-gradient-to-r from-transparent via-gray-300 to-transparent"></div>
+
+              {/* Section 2: Other Details */}
+              <div>
+                <h3 className="text-lg font-bold text-green-700 flex items-center gap-2">
+                  <span className="w-2 h-2 bg-emerald-600 rounded-full"></span>
+                  More Filters
+                </h3>
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-3">
+                  {/* Listing Owner */}
+                  <div className="col-span-2 md:col-span-3 lg:col-span-1">
+                    <label
+                      htmlFor="ownerName"
+                      className="block text-sm font-semibold text-gray-700 mb-2"
+                    >
+                      Listing Owner
+                    </label>
+                    <SearchableSelect
+                      id="ownerName"
+                      name="ownerName"
+                      value={filters.ownerName}
+                      onChange={handleInputChange}
+                      placeholder="Select Owner"
+                      options={ownerArray.filter(Boolean)}
                     />
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleFilterClick}
-                    className="bg-green-600 h-11 hover:bg-emerald-800 text-white font-semibold py-2 px-5 text-sm rounded-md"
-                  >
-                    Search
-                  </button>
-                  <button
-                    type="button"
-                    onClick={handleReset}
-                    className="bg-emerald-700 h-11 hover:bg-red-700 text-white font-semibold py-2 px-5 text-sm rounded-md"
-                  >
-                    Reset
-                  </button>
+                  </div>
+
+                  {/* Other Select Filters */}
+                  {selectFilters.map((filter) => (
+                    <div key={filter.name}>
+                      <label
+                        htmlFor={filter.name}
+                        className="block text-sm font-semibold text-gray-700 mb-2"
+                      >
+                        {filter.label}
+                      </label>
+                      <div className="relative">
+                        <select
+                          id={filter.name}
+                          name={filter.name}
+                          value={filters[filter.name]}
+                          onChange={handleInputChange}
+                          className="w-full h-11 pl-3 pr-8 border border-gray-300 rounded-lg text-sm bg-gray-50 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 shadow-sm"
+                        >
+                          <option value="">Any</option>
+                          {filter.options.map((option) => (
+                            <option key={option} value={option}>
+                              {filter.name === "bedrooms" && option === 0
+                                ? "Studio"
+                                : option}
+                            </option>
+                          ))}
+                        </select>
+                        <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                          <svg
+                            className="w-4 h-4 text-gray-500"
+                            fill="none"
+                            stroke="currentColor"
+                            viewBox="0 0 24 24"
+                          >
+                            <path
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                              strokeWidth="2"
+                              d="M8 9l4-4 4 4m0 6l-4 4-4-4"
+                            ></path>
+                          </svg>
+                        </div>
+                      </div>
+                    </div>
+                  ))}
                 </div>
+              </div>
+
+              {/* Action Buttons */}
+              <div className="flex justify-end gap-4 mt-8">
+                <button
+                  type="button"
+                  onClick={handleRefresh}
+                  className="bg-green-500 h-11 w-11 hover:bg-green-600 text-white font-semibold rounded-xl flex items-center justify-center shadow-md hover:shadow-lg"
+                >
+                  <RefreshCcw
+                    className={`h-5 w-5 ${isSpinning ? "animate-spin" : ""}`}
+                    style={{ animationDuration: isSpinning ? "1s" : "0s" }}
+                  />
+                </button>
+                <button
+                  type="button"
+                  onClick={handleFilterClick}
+                  className="bg-gradient-to-r from-green-600 to-emerald-700 h-11 text-white font-semibold py-2 px-6 text-sm rounded-xl shadow-md hover:shadow-lg hover:scale-105 transform transition-all"
+                >
+                  Search
+                </button>
+                <button
+                  type="button"
+                  onClick={handleReset}
+                  className="bg-gradient-to-r from-red-500 to-red-600 h-11 text-white font-semibold py-2 px-6 text-sm rounded-xl shadow-md hover:shadow-lg hover:scale-105 transform transition-all"
+                >
+                  Reset
+                </button>
               </div>
             </div>
           </div>
-        )}
-      </div>
-    );
+        </div>
+      )}
+    </div>
+  );
+};
 
-  };
-
-  export default FilterBar;
+export default FilterBar;

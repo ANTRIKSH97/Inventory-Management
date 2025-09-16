@@ -16,7 +16,7 @@ const formatTimeSinceAdded = (dateString) => {
   return `${diffInDays} days ago`;
 };
 
-const InventoryCard = ({ property }) => {
+const InventoryCard = ({ property , view  }) => {
   const navigate = useNavigate();
   const [mainImageIndex, setMainImageIndex] = React.useState(0);
 
@@ -40,16 +40,18 @@ const InventoryCard = ({ property }) => {
   };
 
   return (
-    <div
-      className="flex flex-col bg-white rounded-xl shadow-lg overflow-hidden 
-      transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 cursor-pointer 
-      border border-gray-200 w-[480px]"
-      onClick={handleCardClick}
-      role="button"
-      tabIndex={0}
-    >
-      {/* === Image Section === */}
-      <div className="relative w-full h-56 flex-shrink-0">
+  <div
+    className={`flex flex-col bg-white rounded-xl shadow-lg overflow-hidden 
+    transition-all duration-300 hover:shadow-2xl hover:-translate-y-1 cursor-pointer 
+    border border-green-700 
+    ${view === "grid" ? "w-full md:w-[48%]" : "w-full"}`}
+    onClick={handleCardClick}
+    role="button"
+    tabIndex={0}
+  >
+    {/* === Image Section === */}
+
+      <div className="relative w-full h-56 flex-shrink-0 ">
         {images.length > 0 && images[mainImageIndex]?.url ? (
           <img
             src={images[mainImageIndex].url}
@@ -70,13 +72,13 @@ const InventoryCard = ({ property }) => {
           <>
             <button
               onClick={handlePrevImage}
-              className="absolute left-2 top-1/2 -translate-y-1/2 bg-white/70 p-1.5 rounded-full hover:bg-white transition-all shadow-md"
+              className="absolute left-2 top-1/2 -translate-y-1/2 bg-green/70 p-1.5 rounded-full hover:bg-white transition-all shadow-md"
             >
               <ChevronLeft size={20} />
             </button>
             <button
               onClick={handleNextImage}
-              className="absolute right-2 top-1/2 -translate-y-1/2 bg-white/70 p-1.5 rounded-full hover:bg-white transition-all shadow-md"
+              className="absolute right-2 top-1/2 -translate-y-1/2 bg-green/70 p-1.5 rounded-full hover:bg-white transition-all shadow-md"
             >
               <ChevronRight size={20} />
             </button>
@@ -91,13 +93,13 @@ const InventoryCard = ({ property }) => {
       <div className="p-5 flex flex-col justify-between flex-1 text-left">
         <div>
           <div className="flex justify-between items-start">
-            <p className="text-2xl font-bold text-gray-800">
+            <p className="text-2xl font-bold text-green-800">
               AED {property.price || 'N/A'}
             </p>
             <span
-              className={`px-3 py-1 text-xs font-semibold rounded-full ${
+              className={`px-3 py-1 text-xs font-semibold rounded-full transition-all duration-300  ${
                 property.status === 'Published'
-                  ? 'bg-green-100 text-green-800'
+                  ? 'bg-green-100 text-green-900 shadow-md ring-2 ring-green-500 animate-pulse-glow'
                   : 'bg-red-100 text-red-800'
               }`}
             >
@@ -105,27 +107,27 @@ const InventoryCard = ({ property }) => {
             </span>
           </div>
 
-          <h3 className="text-lg font-semibold text-gray-900 mt-2 break-words">
+          <h3 className="text-lg font-semibold mt-2 break-words">
             {property.title || 'Untitled Property'}
           </h3>
 
-          <div className="flex flex-wrap gap-4 my-4 text-sm text-gray-700">
+          <div className="flex flex-wrap gap-3  my-4 text-sm text-black-700">
             <div className="flex items-center">
-              <BedDouble size={16} className="mr-1.5 text-gray-500" />
+              <BedDouble size={16} className="mr-1.5 text-amber-500" />
               <span>{property.bedrooms ?? 'N/A'} Beds</span>
             </div>
             <div className="flex items-center">
-              <Bath size={16} className="mr-1.5 text-gray-500" />
+              <Bath size={16} className="mr-1.5 text-red-500" />
               <span>{property.bathrooms ?? 'N/A'} Baths</span>
             </div>
             <div className="flex items-center">
-              <SquareKanban size={16} className="mr-1.5 text-gray-500" />
+              <SquareKanban size={16} className="mr-1.5 text-green-500" />
               <span>{property.size ?? 'N/A'} sqft</span>
             </div>
           </div>
 
           {/* --- All Details --- */}
-          <div className="space-y-2 text-sm text-gray-600 border-t border-gray-100 pt-3">
+          <div className="space-y-2 text-sm text-black-600 border-t border-gray-100 pt-3">
             <div className="flex items-center text-green-600 font-medium">
               <MapPin size={15} className="mr-1.5 flex-shrink-0" />
               <span>Bayut: {property.locationBayut || 'N/A'}</span>
@@ -135,8 +137,8 @@ const InventoryCard = ({ property }) => {
               <span>PF: {property.locationPf || 'N/A'}</span>
             </div>
             <p>Status: {property.projectStatus || 'N/A'}</p>
-            <p>Listed: {formatTimeSinceAdded(property.createdAt)}</p>
-            <p>Updated: {formatTimeSinceAdded(property.updatedAt)}</p>
+            {/* <p>Listed: {formatTimeSinceAdded(property.createdAt)}</p>
+            <p>Updated: {formatTimeSinceAdded(property.updatedAt)}</p> */}
           </div>
         </div>
 
@@ -144,7 +146,7 @@ const InventoryCard = ({ property }) => {
         <div className="border-t border-gray-100 pt-4 mt-4">
           <div className="flex items-center justify-between mb-3">
             <div className="text-sm">
-              <span className="text-gray-500">Owner: </span>
+              <span className="text-red-700">Owner: </span>
               <a
                 href={property.ownerUrl}
                 target="_blank"
@@ -164,7 +166,7 @@ const InventoryCard = ({ property }) => {
             <a
               href={`tel:${property.ownerPhone}`}
               onClick={(e) => e.stopPropagation()}
-              className="flex-1 text-center bg-blue-500 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-blue-600 transition-colors"
+              className="flex-1 text-center bg-blue-700 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-blue-600 transition-colors"
             >
               <Phone className="h-4 w-4 mr-2" />
               <span>Call</span>
@@ -172,16 +174,16 @@ const InventoryCard = ({ property }) => {
             <a
               href={`https://wa.me/${property.ownerPhone}`}
               onClick={(e) => e.stopPropagation()}
-              className="flex-1 text-center bg-green-500 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-green-600 transition-colors"
+              className="flex-1 text-center bg-green-700 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-green-600 transition-colors"
             >
               <MessageCircle className="h-4 w-4 mr-2" />
               <span>Whatsapp</span>
-            </a>
+            </a>  
           </div>
         </div>
       </div>
     </div>
-  );
+  )
 };
 
 export default InventoryCard;
