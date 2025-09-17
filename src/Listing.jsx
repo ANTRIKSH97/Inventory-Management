@@ -82,27 +82,28 @@ const Listing = () => {
         fullPriceRange={priceRange}
       />
 
- {/* Toggle Button */}
-<div className="flex justify-end max-w-5xl mx-27 px-4 mb-1">
+{/* Toggle Button - Naya aur Behtar Layout */}
+<div className="flex justify-end max-w-5xl mx-auto px-4 mb-4">
   <button
     onClick={() => setIsGridView(!isGridView)}
-    className="relative inline-flex items-center w-24 h-9  rounded-full transition-colors duration-500 focus:outline-none
+    className="relative flex items-center justify-around w-24 h-9 rounded-full transition-colors duration-500 focus:outline-none
                bg-gradient-to-r from-green-500 to-emerald-600 shadow-lg"
   >
     {/* Sliding Knob */}
     <span
-      className={`absolute top-1 left-0.5 right-0 w-9 h-7 bg-white rounded-full shadow-md transform transition-transform duration-500 ease-in-out
-        ${isGridView ? "translate-x-14" : "translate-x-0"}`}
+      className={`absolute top-1 left-1 w-1/2 h-7 bg-white rounded-full shadow-md transform transition-transform duration-300 ease-in-out
+      ${isGridView ? "translate-x-[88%]" : "translate-x-0"}`}
     />
 
-    {/* Labels */}
-    <div className="flex justify-between w-full px-3 text-xs font-semibold text-white relative z-10">
-      <span className={`${!isGridView ? "text-green-700" : "text-white/80"}`}>List</span>
-      <span className={`${isGridView ? "text-green-700" : "text-white/80"}`}>Grid</span>
-    </div>
+    {/* Labels (ab button ke flex-items hain) */}
+    <span className={`z-10 text-xs font-bold transition-colors duration-300 ${!isGridView ? "text-green-700" : "text-white"}`}>
+      List
+    </span>
+    <span className={`z-10 text-xs font-bold transition-colors duration-300 ${isGridView ? "text-green-700" : "text-white"}`}>
+      Grid
+    </span>
   </button>
 </div>
-
 
 
       {/* Error Message */}

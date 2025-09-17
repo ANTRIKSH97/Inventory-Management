@@ -142,48 +142,53 @@ const InventoryCard = ({ property , view  }) => {
           </div>
         </div>
 
-        {/* --- Bottom Section --- */}
-        <div className="border-t border-gray-100 pt-4 mt-4">
-          <div className="flex items-center justify-between mb-3">
-            <div className="text-sm">
-              <span className="text-black-700"> Listing Owner: </span>
-              <a
-                href={property.ownerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                onClick={(e) => e.stopPropagation()}
-                className="font-semibold text-blue-600 hover:underline break-all"
-              >
-                {property.ownerName || 'N/A'}
-              </a>
+       {/* --- Bottom Section (Re-ordered) --- */}
+        <div className="mt-4 pt-4 border-t">
+            <div className="space-y-3">
+                {/* 1. Owner Name (Sabse Upar) */}
+                <div className="text-sm">
+                  <span className="text-gray-600 font-medium">Listing Owner: </span>
+                  <a
+                    href={property.ownerUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    onClick={(e) => e.stopPropagation()}
+                    className="font-semibold text-blue-600 hover:underline"
+                  >
+                    {property.ownerName || 'N/A'}
+                  </a>
+                </div>
+
+                {/* 2. Call and Whatsapp Buttons */}
+                <div className="flex space-x-2">
+                  <a
+                    href={`tel:${property.ownerPhone}`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex-1 text-center bg-blue-500 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-blue-600"
+                  >
+                    <Phone className="h-4 w-4 mr-2" />
+                    <span>Call</span>
+                  </a>
+                  <a
+                    href={`https://wa.me/${property.ownerPhone}`}
+                    onClick={(e) => e.stopPropagation()}
+                    className="flex-1 text-center bg-green-500 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-green-600"
+                  >
+                    <MessageCircle className="h-4 w-4 mr-2" />
+                    <span>Whatsapp</span>
+                  </a>
+                </div>
+
+                {/* 3. Brochure Generator (Sabse Neeche) */}
+                <div onClick={(e) => e.stopPropagation()} className="pt-1">
+                  <PropertyBrochureGenerator listing={property} />
+                </div>
             </div>
-            <div onClick={(e) => e.stopPropagation()}>
-              <PropertyBrochureGenerator listing={property} />
-            </div>
-          </div>
-          <div className="flex space-x-8 ">
-            <a
-              href={`tel:${property.ownerPhone}`}
-              onClick={(e) => e.stopPropagation()}
-              className="flex-1 text-center bg-blue-700 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-blue-600 transition-colors"
-            >
-              <Phone className="h-4 w-4 mr-2" />
-              <span>Call</span>
-            </a>
-            <a
-              href={`https://wa.me/${property.ownerPhone}`}
-              onClick={(e) => e.stopPropagation()}
-              className="flex-1 text-center bg-green-700 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-green-600 transition-colors"
-            >
-              <MessageCircle className="h-4 w-4 mr-2 " />
-              <span>Whatsapp</span>
-            </a>  
-            
-          </div>
         </div>
       </div>
     </div>
-  )
+  );
 };
 
 export default InventoryCard;
+

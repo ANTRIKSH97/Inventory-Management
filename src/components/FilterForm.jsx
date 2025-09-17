@@ -343,7 +343,7 @@
           </button>
           <button
             onClick={toggleFilters}
-            className="px-5 py-3 flex items-center gap-2 bg-white/80 backdrop-blur-md text-gray-800 rounded-xl font-semibold shadow-md border border-gray-300 hover:shadow-lg hover:scale-105 transition-all duration-300"
+            className="px-5 py-3 flex items-center gap-2 bg-green/80 backdrop-blur-md text-green-800 rounded-xl font-semibold shadow-md border border-green-300 hover:shadow-lg hover:scale-105 transition-all duration-300"
           >
             <Filter size={18} />
             Filters
@@ -355,7 +355,7 @@
       {/* Filter Dropdown */}
       {showFilters && (
         <div className="relative w-full max-w-5xl mx-auto z-10 -mt-2 animate-fadeIn">
-          <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-200 p-6 transition-all duration-300">
+          <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-green-200 p-6 transition-all duration-300">
             <div className="space-y-6">
 
               {/* Section 1: Area & Price */}
