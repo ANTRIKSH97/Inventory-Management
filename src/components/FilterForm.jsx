@@ -38,7 +38,6 @@
     const [bedArray, setBedArray] = useState(["", 0, 1, 2, 3, 4, 5]);
     const [bathArray, setBathArray] = useState(["", 0, 1, 2, 3, 4, 5]);
     const [unitTypeArray, setUnitTypeArray] = useState([
-      "",
       "Apartment",
       "Villa",
       "Short Term / Hotel Apartment",
@@ -46,7 +45,6 @@
     const [statusArray, setStatusArray] = useState(["", "Published", "Pocketed"]);
     const [offeringArray, setOfferingArray] = useState(["", "Rent", "Sale"]);
     const [projectStatusArray, setProjectStatusArray] = useState([
-      "",
       "Off Plan",
       "Off-Plan Primary",
       "Off-Plan Secondary",
@@ -118,7 +116,6 @@
       // Set filter arrays (unchanged)
       setBedArray(
         [
-          "",
           ...new Set(
             savedFilteredData.current
               .map((item) => item?.bedrooms)
@@ -129,7 +126,6 @@
 
       setBathArray(
         [
-          "",
           ...new Set(
             savedFilteredData.current
               .map((item) => item?.bathrooms)
@@ -305,16 +301,12 @@
 
 
     const selectFilters = [
-      { name: "bedrooms", label: "Bed", options: bedArray },
-      { name: "bathrooms", label: "Bath", options: bathArray },
-      { name: "unitType", label: "Unit Type", options: unitTypeArray },
-      { name: "status", label: "Status", options: statusArray },
-      { name: "offeringType", label: "Offering Type", options: offeringArray },
-      {
-        name: "projectStatus",
-        label: "Project Status",
-        options: projectStatusArray,
-      },
+      {name: "bedrooms", label: "Bed", options: bedArray },
+      {name: "bathrooms", label: "Bath", options: bathArray },
+      {name: "unitType", label: "Unit Type", options: unitTypeArray },
+      {name: "status", label: "Status", options: statusArray },
+      {name: "offeringType", label: "Offering Type", options: offeringArray },
+      {name: "projectStatus",label: "Project Status",options: projectStatusArray,},
     ];
 
   return (
@@ -353,18 +345,19 @@
     </div>
 
       {/* Filter Dropdown */}
-      {showFilters && (
-        <div className="relative w-full max-w-5xl mx-auto z-10 -mt-2 animate-fadeIn">
-          <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-green-200 p-6 transition-all duration-300">
-            <div className="space-y-6">
+      {/* Filter Dropdown */}
+{showFilters && (
+  <div className="relative w-full max-w-7xl mx-auto z-10 -mt-7 animate-fadeIn">
+    <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-green-200 p-8 transition-all duration-300">
+      <div className="space-y-6">
 
               {/* Section 1: Area & Price */}
               <div>
-                <h3 className="text-lg font-bold text-green-700 flex items-center gap-2">
+                <h3 className="text- font-bold text-green-700 flex items-center gap-2 -mt-6">
                   <span className="w-2 h-2 bg-green-600 rounded-full"></span>
                   Primary Filters
                 </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-3">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-1">
   {/* Area Filter */}
   <div className="bg-white/90 backdrop-blur-md border border-green-700 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
     <h4 className="text-sm font-semibold text-gray-700 mb-3">Area (sqft.)</h4>
@@ -402,11 +395,11 @@
 
               {/* Section 2: Other Details */}
               <div>
-                <h3 className="text-lg font-bold text-green-700 flex items-center gap-2">
+                <h3 className="text- font-bold text-green-700 flex items-center gap-2 -mt-7">
                   <span className="w-2 h-2 bg-emerald-600 rounded-full"></span>
                   More Filters
                 </h3>
-                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 mt-3">
+                <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-3">
                   {/* Listing Owner */}
                   <div className="col-span-2 md:col-span-3 lg:col-span-1">
                     <label
@@ -440,18 +433,17 @@
                           name={filter.name}
                           value={filters[filter.name]}
                           onChange={handleInputChange}
-                          className="w-full h-11 pl-3 pr-8 border border-gray-300 rounded-lg text-sm bg-gray-50 focus:ring-2 focus:ring-emerald-600 focus:border-emerald-600 shadow-sm"
+                          className="w-full  h-11 pl-3 pr-8 border border--300 rounded-lg text-sm bg--50 focus:ring-2 focus:ring--600 focus:border--600 shadow-sm leading-none"
                         >
                           <option value="">Any</option>
-                          {filter.options.map((option) => (
-                            <option key={option} value={option}>
-                              {filter.name === "bedrooms" && option === 0
-                                ? "Studio"
-                                : option}
-                            </option>
-                          ))}
-                        </select>
-                        <div className="absolute inset-y-0 right-0 flex items-center px-2 pointer-events-none">
+                          {filter.options
+                            .filter(option => option !== "") 
+                            .map((option) => (
+                              <option key={option} value={option}>{filter.name === "bedrooms" && option === 0 ? "Studio" : option}</option>
+                            ))
+                          }
+                        </select> 
+                        <div className="absolute inset-y-0 right-0 flex items-center px-4 pointer-events-none">
                           <svg
                             className="w-4 h-4 text-gray-500"
                             fill="none"

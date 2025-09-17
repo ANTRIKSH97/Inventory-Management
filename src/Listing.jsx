@@ -89,11 +89,12 @@ const Listing = () => {
     className="relative flex items-center justify-around w-24 h-9 rounded-full transition-colors duration-500 focus:outline-none
                bg-gradient-to-r from-green-500 to-emerald-600 shadow-lg"
   >
-    {/* Sliding Knob */}
-    <span
-      className={`absolute top-1 left-1 w-1/2 h-7 bg-white rounded-full shadow-md transform transition-transform duration-300 ease-in-out
-      ${isGridView ? "translate-x-[88%]" : "translate-x-0"}`}
-    />
+   {/* Sliding Knob */}
+<span
+  className={`absolute top-1 left-1 w-1/2 h-7 bg-white rounded-full shadow-md transform transition-transform duration-300 ease-in-out
+  ${isGridView ? "translate-x-full" : "translate-x-0"}`}
+  style={{ width: "calc(50% - 0.34rem)" }} // knob ko parent ke hisaab se exact half banane ke liye
+/>
 
     {/* Labels (ab button ke flex-items hain) */}
     <span className={`z-10 text-xs font-bold transition-colors duration-300 ${!isGridView ? "text-green-700" : "text-white"}`}>

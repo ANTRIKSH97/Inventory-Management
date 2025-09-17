@@ -9,14 +9,12 @@ const Navbar = () => {
       behavior: "smooth"
     });
   };
-
   return (
     <nav className="bg-white shadow-md sticky top-0 z-50">
       {/* Padding ko chhote screens ke liye adjust kiya gaya hai */}
       <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
         {/* A robust 3-column layout using flexbox */}
         <div className="flex items-center justify-between h-20">
-
           {/* Left Side: Logo */}
           <div className="flex-1 flex justify-start">
             <Link to="/" className="flex items-center space-x-3" onClick={scrollToTop}>
