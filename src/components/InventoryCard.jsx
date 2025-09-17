@@ -93,10 +93,14 @@ const InventoryCard = ({ property , view  }) => {
       <div className="p-5 flex flex-col justify-between flex-1 text-left">
         <div>
           <div className="flex justify-between items-start">
-            <p className="text-2xl font-bold text-green-800">
-              AED {property.price || 'N/A'}
-            </p>
-            <span
+          
+            <p
+  className="text-2xl font-bold"
+  style={{ color: "#212529" }}
+>
+  AED {property.price || 'N/A'}
+</p>
+<span
               className={`px-3 py-1 text-xs font-semibold rounded-full transition-all duration-300  ${
                 property.status === 'Published'
                   ? 'bg-green-100 text-green-900 shadow-md ring-2 ring-green-500 animate-pulse-glow'
@@ -113,26 +117,28 @@ const InventoryCard = ({ property , view  }) => {
 
           <div className="flex flex-wrap gap-3  my-4 text-sm text-black-700">
             <div className="flex items-center">
-              <BedDouble size={16} className="mr-1.5 text-amber-500" />
+              <BedDouble size={16} className="mr-1.5 text-black-500" />
               <span>{property.bedrooms ?? 'N/A'} Beds</span>
             </div>
             <div className="flex items-center">
-              <Bath size={16} className="mr-1.5 text-red-500" />
+              <Bath size={16} className="mr-1.5 text-black-500" />
               <span>{property.bathrooms ?? 'N/A'} Baths</span>
             </div>
             <div className="flex items-center">
-              <SquareKanban size={16} className="mr-1.5 text-green-500" />
+              <SquareKanban size={16} className="mr-1.5 text-black-500" />
               <span>{property.size ?? 'N/A'} sqft</span>
             </div>
           </div>
 
           {/* --- All Details --- */}
           <div className="space-y-2 text-sm text-black-600 border-t border-gray-100 pt-3">
-            <div className="flex items-center text-green-600 font-medium">
+            <div className="flex items-center font-medium"
+              style={{ color: "#004B23" }}>
               <MapPin size={15} className="mr-1.5 flex-shrink-0" />
               <span>Bayut: {property.locationBayut || 'N/A'}</span>
             </div>
-            <div className="flex items-center text-red-500">
+            <div className="flex items-center"
+            style = {{color: "#8D0801"}}>
               <MapPin size={15} className="mr-1.5 flex-shrink-0" />
               <span>PF: {property.locationPf || 'N/A'}</span>
             </div>
