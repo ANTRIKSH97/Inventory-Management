@@ -37,7 +37,7 @@ function App() {
   useEffect(() => {
     const handleScroll = () => {
       // Agar user 300px se zyada scroll kar chuka hai, to button dikhayein
-      if (window.pageYOffset > 300) {
+      if (window.pageYOffset > 1000) {
         setShowScrollTopButton(true);
       } else {
         setShowScrollTopButton(false);
