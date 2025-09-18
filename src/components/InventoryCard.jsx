@@ -93,8 +93,7 @@ const InventoryCard = ({ property , view  }) => {
       <div className="p-5 flex flex-col justify-between flex-1 text-left">
         <div>
           <div className="flex justify-between items-start">
-          
-            <p
+<p
   className="text-2xl font-bold"
   style={{ color: "#212529" }}
 >

@@ -347,15 +347,13 @@
       {/* Filter Dropdown */}
       {/* Filter Dropdown */}
 {showFilters && (
-  <div className="relative w-full max-w-7xl mx-auto z-10 -mt-7 animate-fadeIn">
+  <div className="relative w-full max-w-5xl mx-auto z-10 -mt-7 animate-fadeIn">
     <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-green-200 p-8 transition-all duration-300">
       <div className="space-y-6">
-
               {/* Section 1: Area & Price */}
               <div>
                 <h3 className="text- font-bold text-green-700 flex items-center gap-2 -mt-6">
-                  <span className="w-2 h-2 bg-green-600 rounded-full"></span>
-                  Primary Filters
+                  <span className="h-0 bg-green-600 rounded-full"></span>
                 </h3>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-1">
   {/* Area Filter */}
@@ -396,8 +394,7 @@
               {/* Section 2: Other Details */}
               <div>
                 <h3 className="text- font-bold text-green-700 flex items-center gap-2 -mt-7">
-                  <span className="w-2 h-2 bg-emerald-600 rounded-full"></span>
-                  More Filters
+                  <span className=" bg-emerald-600 rounded-full"></span>
                 </h3>
                 <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mt-3">
                   {/* Listing Owner */}

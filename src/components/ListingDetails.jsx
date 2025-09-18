@@ -93,155 +93,168 @@ const ListingDetails = () => {
       </div>
     );
 
-  return (
-    <div className="max-w-7xl mx-auto px-4 py-8">
-      <Toaster />
-      <div className="mb-2 flex justify-start">
-        <Link
-          to="/"
-          className="group inline-flex items-center space-x-2 px-4 py-2 rounded-lg border border-green-200 bg-green-50 text-green-600 font-semibold shadow-sm hover:bg-green-100 hover:text-green-800 transition-all duration-300"
-        >
-          <ChevronLeft className="h-5 w-5 text-green-600 group-hover:-translate-x-1 transition-transform duration-300" />
-          Back to Inventory
-        </Link>
-      </div>
+return (
+  <div className="max-w-7xl mx-auto px-4 py-8">
+    <Toaster />
+    <div className="mb-2 flex justify-start">
+      <Link
+        to="/"
+        className="group inline-flex items-center space-x-2 px-4 py-2 rounded-lg border border-green-200 bg-green-50 text-green-600 font-semibold shadow-sm hover:bg-green-100 hover:text-green-800 transition-all duration-300"
+      >
+        <ChevronLeft className="h-5 w-5 text-green-600 group-hover:-translate-x-1 transition-transform duration-300" />
+        Back to Inventory
+      </Link>
+    </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
-        {/* Left Column: Image Gallery */}
-        <div className="space-y-3 w-[110%]">
-          <div className="relative w-full h-[420px] bg-gray-100 rounded-xl shadow-lg border border-green-700 overflow-hidden">
-            {hasImages ? (
-              <img src={images[imageIndex].url} alt={property.title} className="w-full h-full object-cover" />
-            ) : (
-              <div className="w-full h-full flex items-center justify-center text-gray-500">
-                No image available
-              </div>
-            )}
-            {images.length > 1 && (
-              <>
-                <button
-                  onClick={handlePrev}
-                  className="absolute left-3 top-1/2 -translate-y-1/2 bg-green/70 p-2 rounded-full hover:bg-white transition-all shadow-md"
-                >
-                  <ChevronLeft />
-                </button>
-                <button
-                  onClick={handleNext}
-                  className="absolute right-3 top-1/2 -translate-y-1/2 bg-green/70 p-2 rounded-full hover:bg-white transition-all shadow-md"
-                >
-                  <ChevronRight />
-                </button>
-                <div className="absolute bottom-3 right-3 bg-black/50 text-white text-xs px-2.5 py-1 rounded-full">
-                  {imageIndex + 1} / {images.length}
-                </div>
-              </>
-            )}
-          </div>
-
-          {images.length > 1 && (
-            <div className="flex space-x-2 overflow-x-auto pb-2">
-              {images.map((image, index) => (
-                <button
-                  key={index}
-                  onClick={() => setImageIndex(index)}
-                  className={`w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 border-2 transition-all ${
-                    imageIndex === index ? "border-blue-500" : "border-transparent"
-                  }`}
-                >
-                  <img src={image.url} alt={`thumbnail ${index + 1}`} className="w-full h-full object-cover" />
-                </button>
-              ))}
+    {/* Responsive Grid: Mobile → 1 col, Desktop → 2 col */}
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
+      {/* Left Column: Image Gallery */}
+      <div className="space-y-3 w-full lg:w-[110%] order-1 lg:order-1">
+        <div className="relative w-full h-[280px] sm:h-[340px] lg:h-[420px] bg-gray-100 rounded-xl shadow-lg border border-green-700 overflow-hidden">
+          {hasImages ? (
+            <img
+              src={images[imageIndex].url}
+              alt={property.title}
+              className="w-full h-full object-cover"
+            />
+          ) : (
+            <div className="w-full h-full flex items-center justify-center text-gray-500">
+              No image available
             </div>
           )}
+          {images.length > 1 && (
+            <>
+              <button
+                onClick={handlePrev}
+                className="absolute left-3 top-1/2 -translate-y-1/2 bg-green/70 p-2 rounded-full hover:bg-white transition-all shadow-md"
+              >
+                <ChevronLeft />
+              </button>
+              <button
+                onClick={handleNext}
+                className="absolute right-3 top-1/2 -translate-y-1/2 bg-green/70 p-2 rounded-full hover:bg-white transition-all shadow-md"
+              >
+                <ChevronRight />
+              </button>
+              <div className="absolute bottom-3 right-3 bg-black/50 text-white text-xs px-2.5 py-1 rounded-full">
+                {imageIndex + 1} / {images.length}
+              </div>
+            </>
+          )}
         </div>
- <div className="bg-white rounded-xl shadow-lg border border-green-700 p-4 flex flex-col w-[80%] ml-18">
-          <div className="flex-grow">
-            <p className="text-2xl font-bold text-green-700 mt-">AED {property.price}</p>
-            <h1 className="text-2xl font-bold text-black">{property.title}</h1> 
-            
-            <div className="mt-4 flex flex-wrap gap-2">
-  {[property.offeringType, property.status, property.projectStatus].map(
-    (tag) =>
-      tag && (
-        <span
-          key={tag}
-          className="px-3 py-1 text-xs font-semibold rounded-full 
-                     bg-gradient-to-r from-green-400 via-green-500 to-green-600 
-                     text-white shadow-md 
-                     hover:scale-105 transition-transform duration-200 cursor-default"
-        >
-          {tag}
-        </span>
-      )
-  )}
-</div>
 
+        {images.length > 1 && (
+          <div className="flex space-x-2 overflow-x-auto pb-2">
+            {images.map((image, index) => (
+              <button
+                key={index}
+                onClick={() => setImageIndex(index)}
+                className={`w-20 h-20 rounded-lg overflow-hidden flex-shrink-0 border-2 transition-all ${
+                  imageIndex === index ? "border-blue-500" : "border-transparent"
+                }`}
+              >
+                <img
+                  src={image.url}
+                  alt={`thumbnail ${index + 1}`}
+                  className="w-full h-full object-cover"
+                />
+              </button>
+            ))}
+          </div>
+        )}
+      </div>
 
-            <div className="border-t border-gray-200 my-6"></div>
+      {/* Right Column: Property Details */}
+      <div className="bg-white rounded-xl shadow-lg border border-green-700 p-4 flex flex-col w-full lg:w-[80%] lg:ml-18 order-2 lg:order-2">
+        <div className="flex-grow">
+         <p className="text-lg md:text-xl lg:text-2xl font-bold text-green-700">
+  AED {property.price}
+</p>
+<h1 className="text-base md:text-xl lg:text-2xl font-bold text-black">
+  {property.title}
+</h1>
 
-            {/* Left-to-Right Details */}
-            <div className="flex flex-wrap gap-6 text-sm">
-              <div className="flex items-center text-black-700">
-                <BedDouble size={16} className="mr-2 text-amber-400" />
-                <span>{property.bedrooms ?? "N/A"} Bedrooms</span>
-              </div>
-              <div className="flex items-center text-black-700">
-                <Bath size={16} className="mr-2 text-red-400" />
-                <span>{property.bathrooms ?? "N/A"} Bathrooms</span>
-              </div>
-              <div className="flex items-center text-black-700">
-                <SquareKanban size={16} className="mr-2 text-green-400" />
-                <span>{property.size ?? "N/A"} sqft</span>
-              </div>
-              <div className="flex items-center text-black-700">
-
-              </div>
-              <div className="flex items-center text-green-800">
-                <MapPin size={16} className="mr-2 text-green-900" />
-                <span>{property.locationPf || "N/A"}</span>
-              </div>
-            </div>
-
-            <div className="text-xs text-gray-600 mt-4 flex flex-wrap gap-4">
-              {property.reference && <p>Ref ID: {property.reference}</p>}
-            </div>
+          {/* Tags */}
+          <div className="mt-4 flex flex-wrap gap-2">
+            {[property.offeringType, property.status, property.projectStatus].map(
+              (tag) =>
+                tag && (
+                  <span
+                    key={tag}
+                    className="px-3 py-1 text-xs font-semibold rounded-full 
+                               bg-gradient-to-r from-green-400 via-green-500 to-green-600 
+                               text-white shadow-md 
+                               hover:scale-105 transition-transform duration-200 cursor-default"
+                  >
+                    {tag}
+                  </span>
+                )
+            )}
           </div>
 
-          <div className="border-t border-gray-200 mt-6 pt-6 flex flex-col gap-4">
-            <div className="flex items-center gap-2">
-              <span className="text-black text-sm">Listing Owner:</span>
-              <a
-                href={property.ownerUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="text-blue-600 font-semibold hover:underline"
-              >
-                {property.ownerName || "N/A"}
-              </a>
-            </div>
+          <div className="border-t border-gray-200 my-6"></div>
 
-            <div className="flex flex-wrap gap-4">
-              <a
-                href={`tel:${property.ownerPhone}`}
-                className="flex-1 text-center bg-blue-700 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-blue-600 transition-colors"
+          {/* Details */}
+          <div className="flex flex-wrap gap-6 text-sm">
+            <div className="flex items-center text-black-700">
+              <BedDouble size={16} className="mr-2 text--400" />
+              <span>{property.bedrooms ?? "N/A"} Beds</span>
+            </div>
+            <div className="flex items-center text-black-700">
+              <Bath size={16} className="mr-2 text--400" />
+              <span>{property.bathrooms ?? "N/A"} Bath</span>
+            </div>
+            <div className="flex items-center text-black-700">
+              <SquareKanban size={16} className="mr-2 text--400" />
+              <span>{property.size ?? "N/A"} sqft</span>
+            </div>
+           <div className="mr-20 flex items-start text-green-800 w-full">
+  <MapPin size={16} className=" -mr-1  text-green-900 flex-shrink-0 mt-1" />
+  <span className="flex-1 break-words">{property.locationPf || "N/A"}</span>
+</div>
+          </div>
+
+          <div className="text-xs text-gray-600 mt-4 flex flex-wrap gap-4">
+            {<p>Ref ID: {property.reference}</p>}
+          </div>
+        </div>
+
+        {/* Owner & Actions */}
+        <div className="border-t border-gray-200 mt-6 pt-6 flex flex-col gap-4">
+          <div className="flex items-center gap-2">
+            <span className="text-black text-sm">Listing Owner:</span>
+            <a
+              href={property.ownerUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-600 font-semibold hover:underline"
             >
-                <Phone size={16} className="mr-2" /> Call
-              </a>
-              <a
-                href={`https://wa.me/${property.ownerPhone}`}
-                className="flex-1 text-center bg-green-700 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-green-600 transition-colors"
+              {property.ownerName || "N/A"}
+            </a>
+          </div>
+
+          <div className="flex flex-wrap gap-4">
+            <a
+              href={`tel:${property.ownerPhone}`}
+              className="flex-1 text-center bg-blue-700 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-blue-600 transition-colors"
             >
-                <MessageCircle size={16} className="mr-2" /> Whatsapp
-              </a>
-              <div className="flex-1">
-                <PropertyBrochureGenerator listing={property} />
-              </div>
+              <Phone size={16} className="mr-2" /> Call
+            </a>
+            <a
+              href={`https://wa.me/${property.ownerPhone}`}
+              className="flex-1 text-center bg-green-700 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-green-600 transition-colors"
+            >
+              <MessageCircle size={16} className="mr-2" /> Whatsapp
+            </a>
+            <div className="flex-1">
+              <PropertyBrochureGenerator listing={property} />
             </div>
           </div>
         </div>
       </div>
     </div>
-  );
-};
+  </div>
+);
 
+}
 export default ListingDetails;
