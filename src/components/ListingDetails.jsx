@@ -14,6 +14,7 @@ import {
   FileQuestion,
   SquareKanban
 } from "lucide-react";
+import { useSwipeable } from "react-swipeable"; // 👈 NEW
 import PropertyBrochureGenerator from "./PropertyBrochureGenerator";
 
 const formatTimeSince = (dateStr) => {
@@ -32,7 +33,7 @@ const ListingDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [imageIndex, setImageIndex] = useState(0);
-
+    
   useEffect(() => {
     const fetchListing = async () => {
       try {
@@ -60,6 +61,14 @@ const ListingDetails = () => {
     setImageIndex((prev) => (prev === 0 ? images.length - 1 : prev - 1));
   const handleNext = () =>
     setImageIndex((prev) => (prev === images.length - 1 ? 0 : prev + 1));
+
+  // 👇 SWIPE HANDLERS for mobile
+  const handlers = useSwipeable({
+    onSwipedLeft: handleNext,
+    onSwipedRight: handlePrev,
+    preventDefaultTouchmoveEvent: true,
+    trackMouse: true, // mouse drag bhi chalega
+  });
 
   if (loading)
     return (
@@ -110,7 +119,10 @@ return (
     <div className="grid grid-cols-1 lg:grid-cols-2 gap-3">
       {/* Left Column: Image Gallery */}
       <div className="space-y-3 w-full lg:w-[110%] order-1 lg:order-1">
-        <div className="relative w-full h-[280px] sm:h-[340px] lg:h-[420px] bg-gray-100 rounded-xl shadow-lg border border-green-700 overflow-hidden">
+        <div
+          {...handlers} // 👈 swipe support added
+          className="relative w-full h-[280px] sm:h-[340px] lg:h-[420px] bg-gray-100 rounded-xl shadow-lg border border-green-700 overflow-hidden"
+        >
           {hasImages ? (
             <img
               src={images[imageIndex].url}
@@ -169,16 +181,15 @@ return (
         )}
       </div>
 
-
       {/* Right Column: Property Details */}
       <div className="bg-white rounded-xl shadow-lg border border-green-700 p-4 flex flex-col w-full lg:w-[80%] lg:ml-18 order-2 lg:order-2">
         <div className="flex-grow">
          <p className="text-lg md:text-xl lg:text-2xl font-bold text-green-700">
-  AED {property.price}
-</p>
-<h1 className="text-base md:text-xl lg:text-2xl font-bold text-black">
-  {property.title}
-</h1>
+           AED {property.price}
+         </p>
+         <h1 className="text-base md:text-xl lg:text-2xl font-bold text-black">
+           {property.title}
+         </h1>
 
           {/* Tags */}
           <div className="mt-4 flex flex-wrap gap-2">
@@ -215,9 +226,9 @@ return (
               <span>{property.size ?? "N/A"} sqft</span>
             </div>
            <div className="mr-20 flex items-start text-green-800 w-full">
-  <MapPin size={16} className=" -mr-1 text-green-900 flex-shrink-0 mt-1" />
-  <span className="flex-1 break-words">{property.locationPf || "N/A"}</span>
-</div>
+             <MapPin size={16} className=" -mr-1 text-green-900 flex-shrink-0 mt-1" />
+             <span className="flex-1 break-words">{property.locationPf || "N/A"}</span>
+           </div>
           </div>
 
           <div className="text-xs text-gray-600 mt-4 flex flex-wrap gap-4">
@@ -242,14 +253,14 @@ return (
           <div className="flex flex-wrap gap-4">
             <a
               href={`tel:${property.ownerPhone}`}
-               className="flex-1 text-center bg-blue-500 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-blue-600"
-                  >
+              className="flex-1 text-center bg-blue-500 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-blue-600"
+            >
               <Phone size={16} className="mr-2" /> Call
             </a>
             <a
               href={`https://wa.me/${property.ownerPhone}`}
-             className="flex-1 text-center bg-green-500 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-green-600"
-                  >
+              className="flex-1 text-center bg-green-500 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-green-600"
+            >
               <MessageCircle size={16} className="mr-2" /> Whatsapp
             </a>
             <div className="flex-1">
