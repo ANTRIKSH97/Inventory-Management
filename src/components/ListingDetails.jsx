@@ -124,18 +124,23 @@ return (
           )}
           {images.length > 1 && (
             <>
+              {/* Prev Button (Desktop Only) */}
               <button
                 onClick={handlePrev}
-                className="absolute left-3 top-1/2 -translate-y-1/2 bg-green/70 p-2 rounded-full hover:bg-white transition-all shadow-md"
+                className="hidden sm:flex absolute left-3 top-1/2 -translate-y-1/2 bg-green/70 p-2 rounded-full hover:bg-white transition-all shadow-md"
               >
                 <ChevronLeft />
               </button>
+
+              {/* Next Button (Desktop Only) */}
               <button
                 onClick={handleNext}
-                className="absolute right-3 top-1/2 -translate-y-1/2 bg-green/70 p-2 rounded-full hover:bg-white transition-all shadow-md"
+                className="hidden sm:flex absolute right-3 top-1/2 -translate-y-1/2 bg-green/70 p-2 rounded-full hover:bg-white transition-all shadow-md"
               >
                 <ChevronRight />
               </button>
+
+              {/* Counter (Both Views) */}
               <div className="absolute bottom-3 right-3 bg-black/50 text-white text-xs px-2.5 py-1 rounded-full">
                 {imageIndex + 1} / {images.length}
               </div>
@@ -163,6 +168,7 @@ return (
           </div>
         )}
       </div>
+
 
       {/* Right Column: Property Details */}
       <div className="bg-white rounded-xl shadow-lg border border-green-700 p-4 flex flex-col w-full lg:w-[80%] lg:ml-18 order-2 lg:order-2">
@@ -209,7 +215,7 @@ return (
               <span>{property.size ?? "N/A"} sqft</span>
             </div>
            <div className="mr-20 flex items-start text-green-800 w-full">
-  <MapPin size={16} className=" -mr-1  text-green-900 flex-shrink-0 mt-1" />
+  <MapPin size={16} className=" -mr-1 text-green-900 flex-shrink-0 mt-1" />
   <span className="flex-1 break-words">{property.locationPf || "N/A"}</span>
 </div>
           </div>
@@ -236,14 +242,14 @@ return (
           <div className="flex flex-wrap gap-4">
             <a
               href={`tel:${property.ownerPhone}`}
-              className="flex-1 text-center bg-blue-700 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-blue-600 transition-colors"
-            >
+               className="flex-1 text-center bg-blue-500 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-blue-600"
+                  >
               <Phone size={16} className="mr-2" /> Call
             </a>
             <a
               href={`https://wa.me/${property.ownerPhone}`}
-              className="flex-1 text-center bg-green-700 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-green-600 transition-colors"
-            >
+             className="flex-1 text-center bg-green-500 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-green-600"
+                  >
               <MessageCircle size={16} className="mr-2" /> Whatsapp
             </a>
             <div className="flex-1">

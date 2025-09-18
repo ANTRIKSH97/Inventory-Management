@@ -124,7 +124,7 @@ const AutocompleteSearch = ({
           onFocus={() => setShowSuggestions(true)}
           onBlur={() => setTimeout(() => setShowSuggestions(false), 200)}
         />
-        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-green-400 h-5 w-5" />
+        <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text--400 h-5 w-5" />
         {searchTerm && (
           <button
             className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-400 hover:text-gray-600"

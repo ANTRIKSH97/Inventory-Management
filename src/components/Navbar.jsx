@@ -9,42 +9,38 @@ const Navbar = () => {
       behavior: "smooth"
     });
   };
+
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
-      {/* Padding ko chhote screens ke liye adjust kiya gaya hai */}
-      <div className="max-w-7xl mx-auto px-2 sm:px-6 lg:px-8">
-        {/* A robust 3-column layout using flexbox */}
+    // Replaced shadow with a clean bottom border for a more modern look
+    <nav className="bg-white sticky top-0 z-50 border-b border-gray-200">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        {/* Using the same robust 3-column layout */}
         <div className="flex items-center justify-between h-20">
+
           {/* Left Side: Logo */}
           <div className="flex-1 flex justify-start">
             <Link to="/" className="flex items-center space-x-3" onClick={scrollToTop}>
-              <div className="w-12 h-14 md:w-14 md:h-16 rounded-lg overflow-hidden shadow-lg
-                                bg-gradient-to-tr from-green-700 to-green-700
-                                flex items-center justify-center">
+              {/* Simplified logo background for better contrast and a square aspect ratio */}
+              <div className="w-14 h-14 rounded-lg bg-gray-600 flex items-center justify-center shadow-sm">
                 <img 
                   src="/logo.png"
-                  alt="Smart Inventory Logo" 
-                  className="w-10 h-10 md:w-12 md:h-12 object-contain"
+                  alt="Inventory Management Logo" 
+                  className="w-11 h-11 object-contain"
                 />
               </div>
             </Link>
           </div>
 
-          {/* Middle: Title (Now visible on all screen sizes) */}
+          {/* Middle: Title (with refined styling) */}
           <div className="flex-shrink-0 px-2">
             <Link to="/" onClick={scrollToTop} className="flex flex-col items-center">
-             {/* Responsive text size for the title */}
-<h1
-  className="text-xl sm:text-2xl md:text-3xl lg:text-4xl font-extrabold 
-             bg-gradient-to-r from-green-700 to-green-500
-             bg-clip-text text-transparent text-center leading-tight px-2"
->
-  Inventory Management
-</h1>
-
-              {/* Gradient line is hidden on the smallest screens for a cleaner look */}
-              <div className="mt-2 hidden sm:block">
-                <div className="w-48 md:w-64 h-1 bg-gradient-to-r from-green-300 to-green-600 rounded-full"></div>
+              {/* Solid text color is more readable and professional than a gradient */}
+              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold text-gray-800 text-center leading-tight">
+                Inventory Management
+              </h1>
+              {/* The gradient line is now more subtle */}
+              <div className="mt-1.5 hidden sm:block">
+                <div className="w-48 md:w-64 h-1 bg-gradient-to-r from-green-200 to-gray-400 rounded-full"></div>
               </div>
             </Link>
           </div>

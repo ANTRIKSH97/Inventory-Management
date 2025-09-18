@@ -131,16 +131,21 @@ const InventoryCard = ({ property , view  }) => {
 
           {/* --- All Details --- */}
           <div className="space-y-2 text-sm text-black-600 border-t border-gray-100 pt-3">
-            <div className="flex items-center font-medium"
-              style={{ color: "#004B23" }}>
-              <MapPin size={15} className="mr-1.5 flex-shrink-0" />
-              <span>Bayut: {property.locationBayut || 'N/A'}</span>
-            </div>
-            <div className="flex items-center"
-            style = {{color: "#8D0801"}}>
-              <MapPin size={15} className="mr-1.5 flex-shrink-0" />
-              <span>PF: {property.locationPf || 'N/A'}</span>
-            </div>
+
+           <div className="flex items-center text-gray-800">
+  <MapPin size={15} className="mr-1.5 flex-shrink-0 text-gray-800" />
+  <span>
+    PF: <span style={{ color: "#65000B" }}>{property.locationPf || 'N/A'}</span>
+  </span>
+</div>
+            <div className="flex items-center text-gray-800">
+    <MapPin size={15} className="mr-1.5 flex-shrink-0 text-gray-800" />
+    <span>
+      Bayut: <span style={{ color: "#00401A" }}>{property.locationBayut || 'N/A'}</span>
+    </span>
+  </div>
+
+
             <p>Status: {property.projectStatus || 'N/A'}</p>
             {/* <p>Listed: {formatTimeSinceAdded(property.createdAt)}</p>
             <p>Updated: {formatTimeSinceAdded(property.updatedAt)}</p> */}
@@ -177,8 +182,8 @@ const InventoryCard = ({ property , view  }) => {
                   <a
                     href={`https://wa.me/${property.ownerPhone}`}
                     onClick={(e) => e.stopPropagation()}
-                    className="flex-1 text-center bg-green-500 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-green-600"
-                  >
+                      className="flex-1 text-center bg-green-500 text-white px-4 py-2 rounded-full text-sm flex items-center justify-center shadow-md hover:bg-green-600"
+                    >
                     <MessageCircle className="h-4 w-4 mr-2" />
                     <span>Whatsapp</span>
                   </a>
