@@ -225,11 +225,29 @@ return (
               <SquareKanban size={16} className="mr-2 text--400" />
               <span>{property.size ?? "N/A"} sqft</span>
             </div>
-           <div className="mr-20 flex items-start text-green-800 w-full">
+           {/* <div className="mr-20 flex items-start text-green-800 w-full">
              <MapPin size={16} className=" -mr-1 text-green-900 flex-shrink-0 mt-1" />
              <span className="flex-1 break-words">{property.locationPf || "N/A"}</span>
-           </div>
-          </div>
+           </div> */}
+           
+          <div className="text-gray-800 w-full space-y-2">
+    {/* PF Location */}
+   <div className="flex items-center text-gray-800">
+    <MapPin size={15} className="mr-1.5 flex-shrink-0 text-gray-800" />
+    <span>
+      PF: <span style={{ color: "#65000B" }}>{property.locationPf || 'N/A'}</span>
+    </span>
+  </div>
+
+  {/* Bayut Location */}
+  <div className="flex items-start text-gray-800">
+      <MapPin size={15} className="mr-1.5 flex-shrink-0 text-gray-800" />
+      <span>
+        Bayut: <span style={{ color: "#00401A" }}>{property.locationBayut || 'N/A'}</span>
+      </span>
+    </div>
+</div>
+</div>
 
           <div className="text-xs text-gray-600 mt-4 flex flex-wrap gap-4">
             {<p>Ref ID: {property.reference}</p>}

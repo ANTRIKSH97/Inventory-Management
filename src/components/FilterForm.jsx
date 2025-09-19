@@ -313,6 +313,8 @@
     <div className="relative w-full px-4 py-2 space-y-4">
       {/* Search Bar and Buttons */}
       <div className="relative w-full max-w-5xl mx-auto my-6 z-20">
+         {/* Main Flex Container - Mobile par vertical, desktop par horizontal */}
+        <div className="flex flex-col sm:flex-row items-center gap-2"></div>
         <div className="flex items-center -space-x-4">
           {/* Search Input */}
           <div className="relative flex-1">
@@ -335,7 +337,7 @@
           </button> */}
           <button
   onClick={toggleFilters}
-  className="ml-0 sm:ml-0 w-full sm:w-auto px-4 py-3 flex items-center justify-center gap-2 bg-green/80 backdrop-blur-md text-green-800 rounded-xl font-semibold shadow-md border border-green-300 hover:shadow-lg hover:scale-105 transition-all duration-300"
+  className="ml-1 ml-0 sm:ml-0 w-full sm:w-auto px-4 py-3 flex items-center justify-center gap-2 bg-green/80 backdrop-blur-md text-green-800 rounded-xl font-semibold shadow-md border border-green-300 hover:shadow-lg hover:scale-105 transition-all duration-300"
 >
   <Filter size={24} />
   <span className="hidden sm:inline">Filter</span>
