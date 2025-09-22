@@ -544,3 +544,11 @@ export default ListingDetails;
                     style={{ animationDuration: isSpinning ? "1s" : "0s" }}
                   />
                 </button> */} 
+
+                 {/* <button
+            onClick={handleFilterClick}
+            className="px-5 py-3 flex items-center gap-2 bg-gradient-to-r from-green-600 to-emerald-700 text-white rounded-xl font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
+          >
+            <Search size={18} />
+            Search
+          </button> */}

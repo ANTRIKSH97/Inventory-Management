@@ -327,25 +327,14 @@
             />
           </div>
             {/* Search & Filter Buttons */}
-        <div className="flex items-center gap-3 mr-6">
-          {/* <button
-            onClick={handleFilterClick}
-            className="px-5 py-3 flex items-center gap-2 bg-gradient-to-r from-green-600 to-emerald-700 text-white rounded-xl font-semibold shadow-md hover:shadow-lg hover:scale-105 transition-all duration-300"
-          >
-            <Search size={18} />
-            Search
-          </button> */}
+        <div className="flex items-start gap-3 mr-0 flex-col sm:flex-row sm:gap-3 sm:mr-6">
           <button
   onClick={toggleFilters}
-  className="ml-1 ml-7 sm:ml-0 w-full sm:w-auto px-4 py-3 flex items-center justify-center gap-2 bg-green/80 backdrop-blur-md text-green-800 rounded-xl font-semibold shadow-md border border-green-300 hover:shadow-lg hover:scale-105 transition-all duration-300"
+  className="ml-1 ml-3 sm:ml-0 w-full sm:w-auto px-4 py-3 flex items-center justify-center gap-2 bg-green/80 backdrop-blur-md text-green-800 rounded-xl font-semibold shadow-md border border-green-300 hover:shadow-lg hover:scale-105 transition-all duration-300"
 >
   <Filter size={24} />
   <span className="hidden sm:inline">Filter</span>
 </button>
-
-
-
-
         </div>
       </div>
     </div>
