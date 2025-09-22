@@ -337,7 +337,7 @@
           </button> */}
           <button
   onClick={toggleFilters}
-  className="ml-1 ml-0 sm:ml-0 w-full sm:w-auto px-4 py-3 flex items-center justify-center gap-2 bg-green/80 backdrop-blur-md text-green-800 rounded-xl font-semibold shadow-md border border-green-300 hover:shadow-lg hover:scale-105 transition-all duration-300"
+  className="ml-1 ml-7 sm:ml-0 w-full sm:w-auto px-4 py-3 flex items-center justify-center gap-2 bg-green/80 backdrop-blur-md text-green-800 rounded-xl font-semibold shadow-md border border-green-300 hover:shadow-lg hover:scale-105 transition-all duration-300"
 >
   <Filter size={24} />
   <span className="hidden sm:inline">Filter</span>
@@ -351,22 +351,34 @@
     </div>
       {/* Filter Dropdown */}
 {showFilters && (
-  <div className="relative w-full max-w-5xl mx-auto z-10 -mt-7 animate-fadeIn">
-    <div className="bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl border border-green-200 p-8 transition-all duration-300">
-      <div className="space-y-6">
+ <div
+  className="
+    relative w-full sm:w-11/12 md:w-10/12 lg:w-full 
+    max-w-md sm:max-w-2xl lg:max-w-5xl 
+    mx-auto z-10 -mt-7 animate-fadeIn
+  "
+>
+    <div
+    className=" 
+      bg-white/80 backdrop-blur-xl rounded-2xl shadow-2xl 
+      border border-green-200 p-6 sm:p-8 transition-all duration-300
+      max-h-[55vh] overflow-y-auto sm:max-h-none 
+      "
+  >
+      <div className="space-y-5">
               {/* Section 1: Area & Price */}
               <div>
-                <h3 className="text- font-bold text-green-700 flex items-center gap-2 -mt-6">
-                  <span className="h-0 bg-green-600 rounded-full"></span>
+                <h3 className="text- font-bold text-gray-700 flex items-center gap-0 -mt-6">
+                  <span className="h-0 bg-gray-600 rounded-full"></span>
                 </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-1">
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mt-1">
   {/* Area Filter */}
-  <div className="bg-white/90 backdrop-blur-md border border-green-700 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
-    <h4 className="text-sm font-semibold text-gray-700 mb-3">Area (sqft.)</h4>
+  <div className="bg-white/90 backdrop-blur-md border border--700 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
+    <h4 className="text-sm font-semibold text-gray-700 mb-0 -mt-3 ">Area (sqft.)</h4>
     <RangeFilter
       label=""
       unit="sqft."
-      fromValue={fromArea}
+      fromValue={fromArea}        
       setFromValue={setFromArea}
       toValue={toArea}
       setToValue={setToArea}
@@ -375,8 +387,8 @@
   </div>
 
   {/* Price Filter */}
-  <div className="bg-white/90 backdrop-blur-md border border-green-700 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
-    <h4 className="text-sm font-semibold text-gray-700 mb-3">Price (AED)</h4>
+  <div className="bg-white/90 backdrop-blur-md border border--700 rounded-xl p-4 shadow-sm hover:shadow-md transition-all duration-300">
+    <h4 className="text-sm font-semibold text-gray-700 mb-0 -mt-3">Price (AED)</h4>
     <RangeFilter
       label=""
       unit="AED"
@@ -434,7 +446,9 @@
                           name={filter.name}
                           value={filters[filter.name]}
                           onChange={handleInputChange}
-                          className="w-full  h-11 pl-3 pr-8 border border--300 rounded-lg text-sm bg--50 focus:ring-2 focus:ring--600 focus:border--600 shadow-sm leading-none"
+                          className="w-full h-8 pl-2 pr-4 border border-gray-300 rounded-md text-sm bg-gray-50 
+focus:ring-2 focus:ring-green-600 focus:border-green-600 shadow-sm leading-none"
+
                         >
                           <option value="">Any</option>
                           {filter.options
@@ -465,33 +479,23 @@
                 </div>
               </div>
 
-              {/* Action Buttons */}
-              <div className="flex justify-end gap-4 mt-8">
-                <button
-                  type="button"
-                  onClick={handleRefresh}
-                  className="bg-green-500 h-11 w-11 hover:bg-green-600 text-white font-semibold rounded-xl flex items-center justify-center shadow-md hover:shadow-lg"
-                >
-                  <RefreshCcw
-                    className={`h-5 w-5 ${isSpinning ? "animate-spin" : ""}`}
-                    style={{ animationDuration: isSpinning ? "1s" : "0s" }}
-                  />
-                </button>
-                <button
-                  type="button"
-                  onClick={handleFilterClick}
-                  className="bg-gradient-to-r from-green-600 to-emerald-700 h-11 text-white font-semibold py-2 px-6 text-sm rounded-xl shadow-md hover:shadow-lg hover:scale-105 transform transition-all"
-                >
-                  Search
-                </button>
-                <button
-                  type="button"
-                  onClick={handleReset}
-                  className="bg-gradient-to-r from-red-500 to-red-600 h-11 text-white font-semibold py-2 px-6 text-sm rounded-xl shadow-md hover:shadow-lg hover:scale-105 transform transition-all"
-                >
-                  Reset
-                </button>
-              </div>
+         {/* Action Buttons */}
+<div className="flex justify-end gap-2 mt-4 sm:mt-4">
+  <button
+    type="button"
+    onClick={handleFilterClick}
+    className="mt-2 sm:-mt-14 bg-gradient-to-r from-green-600 to-emerald-700 h-11 text-white font-semibold py-2 px-6 text-sm rounded-xl shadow-md hover:shadow-lg hover:scale-105 transform transition-all"
+  >
+    Search
+  </button>
+  <button
+    type="button"
+    onClick={handleReset}
+    className="mt-2 sm:-mt-14 bg-gradient-to-r from-red-500 to-red-600 h-11 text-white font-semibold py-2 px-6 text-sm rounded-xl shadow-md hover:shadow-lg hover:scale-105 transform transition-all"
+  >
+    Reset
+  </button>
+</div>
             </div>
           </div>
         </div>

@@ -534,3 +534,13 @@ const ListingDetails = () => {
 };
 
 export default ListingDetails;
+  {/* <button
+                  type="button"
+                  onClick={handleRefresh}
+                  className="bg-green-500 h-11 w-11 -mt-13 hover:bg-green-600 text-white font-semibold rounded-xl flex items-center justify-center shadow-md hover:shadow-lg"
+                >
+                  <RefreshCcw
+                    className={`h-5 w-5 ${isSpinning ? "animate-spin" : ""}`}
+                    style={{ animationDuration: isSpinning ? "1s" : "0s" }}
+                  />
+                </button> */} 
